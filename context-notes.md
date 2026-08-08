@@ -10,7 +10,7 @@
 
 ## 2. 진행 완료 항목
 
-- [x] 프로젝트 스캐폴딩: `C:\Users\wavef\superbgm-site`
+- [x] 프로젝트 스캐폴딩: `C:\Users\wavef\superbgm-site` (2026-08-08 `C:\opencode\superbgm-site`로 이동)
   - Next.js **16.3.0**, React **19.2.8**, Tailwind CSS **v4**, TypeScript strict, App Router + `src/`
   - `create-next-app` 기본 템플릿 (app-tw). git 저장소 초기화됨.
 - [x] 채널 실데이터 수집 (YouTube 페이지 HTML에서 ytInitialData 파싱): 채널명/핸들/ID/아바타/설명/MP3 사이트/최신 영상 30개 (제목/조회수/게시 시점/장르 태그)
@@ -58,7 +58,7 @@
 ## 5. 참고 명령어
 
 ```powershell
-cd C:\Users\wavef\superbgm-site
+cd C:\opencode\superbgm-site
 npm run dev        # 개발 서버
 npm run build      # 프로덕션 빌드
 npm run lint       # ESLint
