@@ -1,6 +1,7 @@
 # SuperBGM 채널 홈페이지 — 작업 메모리
 
-> 상태: **랜딩 페이지 구현 완료** — 빌드/린트/dev 검증 통과.
+> 상태: **랜딩 페이지 구현 + OG/favicon 교체 완료** — 빌드/린트 검증 통과, GitHub 푸시 완료.
+> 배포는 보류 (본인 Vercel 로그인 필요, 재개 가능).
 > 최종 갱신: 2026-08-08
 
 ## 1. 목표
@@ -28,11 +29,12 @@
 
 - [x] GitHub 저장소 생성 + 푸시: `flexm2024/superbgm-site` (public) — https://github.com/flexm2024/superbgm-site
 - [x] 배포 전 `npm run build` 재검증 통과 (정적 프리렌더 4/4)
-- [ ] (미완) Vercel 대시보드에서 import + Deploy (본인 계정 로그인 필요)
-  - Vercel 가입/로그인: https://vercel.com → GitHub 계정(flexm2024) 연결
-  - Import: `flexm2024/superbgm-site` 선택 → Framework Next.js 자동 감지 → 기본 설정 그대로 Deploy
+- [ ] (보류) Vercel 배포 — 본인 계정 로그인 필요. 사용자가 "됐어"로 보류, 원하면 언제든 재개
+  - 방법 A (CLI, 추천): `vercel login` (브라우저 로그인, 본인만 가능) → 이후 `vercel --prod`는 에이전트가 진행 가능 (Vercel CLI v54.12.2 설치됨)
+  - 방법 B (대시보드): https://vercel.com → GitHub 계정(flexm2024) 연결 → `flexm2024/superbgm-site` import → Deploy
   - 완료 URL: `https://superbgm-site.vercel.app`
   - 참고: 기본 모드(serverless) 유지가 권장 — `next/image` 최적화가 동작함. `output: 'export'`는 이미지 최적화 비활성화되므로 불필요
+  - 참고: 프로젝트가 `C:\opencode`로 이동했지만 배포와 무관 — Vercel은 GitHub에서 소스를 가져와 빌드함
 
 ## 4. 남은 항목 (선택)
 
@@ -46,7 +48,7 @@
 - [ ] (선택) 데이터 갱신 스크립트로 채널 데이터 최신화
 - [ ] (선택) 커스텀 도메인 연결 (Vercel 대시보드 → Domains) 후 유튜브 채널 링크에 적용
 
-## 4. 핵심 제약 (AGENTS.md 준수)
+## 5. 핵심 제약 (AGENTS.md 준수)
 
 - 데이터 파일 `src/lib/channel.ts`는 수정 금지 (진실 원천)
 - 추가 npm 패키지 설치 금지
@@ -55,7 +57,7 @@
 - 파일 헤더: 새 소스 파일 첫 줄에 한국어 한 줄 주석 (역할 설명)
 - 완료 전 테스트/빌드 필수
 
-## 5. 참고 명령어
+## 6. 참고 명령어
 
 ```powershell
 cd C:\opencode\superbgm-site
@@ -64,10 +66,16 @@ npm run build      # 프로덕션 빌드
 npm run lint       # ESLint
 ```
 
-## 6. 채널 데이터 재수집 (필요 시)
+## 7. 채널 데이터 재수집 (필요 시)
 
 ```powershell
 # 채널 메타:  Invoke-WebRequest "https://www.youtube.com/@SuperBGM2024"  → superbgm_channel.html
 # 최신 영상:  Invoke-WebRequest "https://www.youtube.com/@SuperBGM2024/videos" → superbgm_videos.html
 node "C:\Users\wavef\AppData\Local\Temp\opencode\parse_channel.mjs" "<html파일경로>"
 ```
+
+## 8. 부수 작업 (2026-08-08)
+
+- 홈 디렉터리(`C:\Users\wavef`) 정리: `alba-app`, `my-image-app`, `ladder-game` → `C:\opencode\`로 이동
+- 홈에 남은 것: `CrossDevice`(폰 백업 데이터, 유지), `node_modules`(잔여물, 삭제 가능), 점 폴더들(도구 설정, 유지)
+- 참고: 자산 생성용 임시 스크립트/파일은 `C:\Users\wavef\AppData\Local\Temp\opencode\superbgm_assets\`에 보관됨 (프로젝트와 무관)
