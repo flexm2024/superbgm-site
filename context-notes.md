@@ -24,11 +24,21 @@
   - `src/app/page.tsx`: aurora 배경 블롭 + 스티키 헤더 + 히어로(아바타/캐치프레이즈/설명/구독·MP3 CTA) + 갤러리 + 소개 + 푸터
 - [x] 검증: `npm run build` 성공 (정적 프리렌더), `npm run lint` 통과, `npm run dev` HTTP 200 + 핵심 문구/영상 30개 렌더링 확인
 
-## 3. 남은 항목 (선택)
+## 3. 배포 준비 (2026-08-08 완료)
 
-- [ ] (선택) 배포: Vercel 등 정적 배포. 완전 정적 사이트라 `output: 'export'`도 가능하나 기본 모드 그대로도 무방
+- [x] GitHub 저장소 생성 + 푸시: `flexm2024/superbgm-site` (public) — https://github.com/flexm2024/superbgm-site
+- [x] 배포 전 `npm run build` 재검증 통과 (정적 프리렌더 4/4)
+- [ ] (미완) Vercel 대시보드에서 import + Deploy (본인 계정 로그인 필요)
+  - Vercel 가입/로그인: https://vercel.com → GitHub 계정(flexm2024) 연결
+  - Import: `flexm2024/superbgm-site` 선택 → Framework Next.js 자동 감지 → 기본 설정 그대로 Deploy
+  - 완료 URL: `https://superbgm-site.vercel.app`
+  - 참고: 기본 모드(serverless) 유지가 권장 — `next/image` 최적화가 동작함. `output: 'export'`는 이미지 최적화 비활성화되므로 불필요
+
+## 4. 남은 항목 (선택)
+
 - [ ] (선택) OG 이미지 / favicon 교체 (현재 create-next-app 기본값)
 - [ ] (선택) 데이터 갱신 스크립트로 채널 데이터 최신화
+- [ ] (선택) 커스텀 도메인 연결 (Vercel 대시보드 → Domains) 후 유튜브 채널 링크에 적용
 
 ## 4. 핵심 제약 (AGENTS.md 준수)
 
