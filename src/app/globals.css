@@ -34,4 +34,60 @@ body {
     background-clip: text;
     color: transparent;
   }
+
+  .animate-float-note {
+    animation: float-note 5s ease-in-out infinite;
+  }
+
+  .animate-float-note-slow {
+    animation: float-note 8s ease-in-out infinite;
+  }
+
+  .animate-eq {
+    animation: eq-wave 1.2s ease-in-out infinite;
+    transform-origin: bottom;
+  }
+
+  .animate-bob {
+    animation: bob 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes float-note {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(5deg);
+  }
+}
+
+@keyframes eq-wave {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-note,
+  .animate-float-note-slow,
+  .animate-eq,
+  .animate-bob {
+    animation: none;
+  }
 }

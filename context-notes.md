@@ -1,6 +1,7 @@
 # SuperBGM 채널 홈페이지 — 작업 메모리
 
 > 상태: **랜딩 페이지 구현 + OG/favicon 교체 + Vercel 배포 + 커스텀 도메인 연결 완료** — 빌드/린트 검증 통과, GitHub 푸시 완료.
+> 진행 중: **히어로 섹션 업그레이드 구현됨(작업 트리, 미커밋 상태였음) + 로고 교체 대기** — 빌드 검증 통과, 2026-08-09 커밋 예정
 > 사이트: https://superbgm.flexmstudio.com (커스텀 도메인, 2026-08-09) / https://superbgm-site.vercel.app (별칭 유지)
 > 최종 갱신: 2026-08-09
 
@@ -24,6 +25,14 @@
   - `src/app/components/video-gallery.tsx`: 'use client' — 태그 필터 탭(전체/발라드/재즈/Lofi/인디포크/댄스/카페/계절) + 반응형 영상 카드 그리드(1/2/3/4열), 빈 상태 메시지
   - `src/app/page.tsx`: aurora 배경 블롭 + 스티키 헤더 + 히어로(아바타/캐치프레이즈/설명/구독·MP3 CTA) + 갤러리 + 소개 + 푸터
 - [x] 검증: `npm run build` 성공 (정적 프리렌더), `npm run lint` 통과, `npm run dev` HTTP 200 + 핵심 문구/영상 30개 렌더링 확인
+- [x] **히어로 섹션 업그레이드 (2026-08-09 구현 완료 — 커밋 대기였음, 08-09 커밋)**
+  - visual-engineering 위임 3회 연속 중단(abort) → **직접 구현 전환** (과거 랜딩 때 2회 포함 총 5회 실패 이력 — 카테고리 자체 문제보다 **동기 task 실행 중 사용자 메시지 도착 시 abort되는 환경 동작**이 원인으로 판단됨)
+  - `src/app/page.tsx`: 오로라 배경 강화(블롭 4개 + radial 오버레이, 모바일 blur 축소), 플로팅 음표 4개(♪♫♬, md+), 이퀄라이저 바 7개(lg+, staggered), 실데이터 통계 배지(플레이리스트 수·감성 무드 수), SCROLL 인디케이터(#playlists), CTA/텍스트 반응형
+  - `src/app/globals.css`: `@keyframes float-note/eq-wave/bob` + `animate-*` 유틸리티, `prefers-reduced-motion` 대응
+  - 검증: `npm run build` 성공(EXIT 0), lint 통과. **주의: 이전 세션에서의 "커밋 8a5a1a2/204f0d4"는 실제 git 로그에 존재하지 않음 — 재구성 오류였음, 실제로는 미커밋 상태였음**
+- [ ] **로고 교체 (진행 중, 2026-08-09)** — 사용자가 `public\로고.png`(1.4MB) 저장함
+  - 할 일: 로고 이미지 시각 확인(`look_at`은 사용자 메시지로 중단됨) → 히어로 아바타(현재 `CHANNEL.avatar`)와 헤더에 적용 → 빌드/배포 → 검증
+  - 참고: `CHANNEL.avatar`는 `src/lib/channel.ts`에 있고(수정 금지 원칙), 컴포넌트에서 `src={CHANNEL.avatar}` 사용 중 — 로고 적용 시 `src="/로고.png"`(또는 파일명 영문화 후 경로)로 바꾸는 방식 고려
 
 ## 3. 배포 준비 (2026-08-08 완료)
 
@@ -38,7 +47,12 @@
 
 ## 4. 남은 항목 (선택)
 
-- [x] OG 이미지 / favicon 교체 (2026-08-08 완료)
+- [ ] **visual-engineering 카테고리 처리 (판단 대기)** — 사용자 지시 "문제 있으면 삭제"
+  - 조사 결과: 카테고리는 플러그인 `oh-my-openagent`에 내장 (`AppData\Roaming\npm\node_modules\oh-my-openagent\dist\index.js` — `CATEGORY_MODEL_REQUIREMENTS`의 `"visual-engineering"` 엔트리, gemini-3.1-pro 등 fallback 체인)
+  - 삭제 방법: 플러그인 코드를 직접 수정하지 말 것(업데이트 시 소실). **config 기반 비활성화 지원**: 사용자 `opencode.jsonc`에 `categories: { "visual-engineering": { "disable": true } }` 추가 (플러그인 스키마 `OhMyOpenCodeConfigSchema.categories` 확인됨, `disable` 필터링 로직도 확인됨)
+  - ⚠️ 원인 분석: 카테고리 자체 결함이 아니라 **동기 task가 실행 중 사용자 메시지에 의해 abort되는 환경 동작**이 5회 실패의 원인일 가능성 높음 — 비활성화해도 다른 카테고리(ultrabrain 등)에서 동일 현상 재발 가능. 삭제 대신 **UI 작업은 background(task, run_in_background=true)로 위임**하는 쪽 권장
+  - 미적용 상태 (2026-08-09 시점) — 사용자 재확인 필요
+- [ ] OG 이미지 / favicon 교체 (2026-08-08 완료)
   - favicon.ico(`src/app/`), favicon 16/32/96, apple-touch-icon, android-chrome 192/512 (`public/`)
   - OG: `og-image.png`(1200x630) / `twitter-image.png`(1200x675) / `og-square.png`(1200x1200) — 채널 아바타 + 다크 오로라 테마 + 한글 폰트(Malgun) 커스텀 생성
   - `layout.tsx`: icons / openGraph / twitter 메타데이터 통합

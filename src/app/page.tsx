@@ -1,6 +1,8 @@
 import Image from "next/image";
-import { CHANNEL } from "@/lib/channel";
+import { CHANNEL, VIDEOS } from "@/lib/channel";
 import { VideoGallery } from "@/app/components/video-gallery";
+
+const uniqueMoods = new Set(VIDEOS.flatMap((video) => video.tags)).size;
 
 export default function Home() {
   return (
@@ -9,9 +11,11 @@ export default function Home() {
         aria-hidden
         className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute -top-32 left-1/4 h-[480px] w-[480px] rounded-full bg-indigo-600/25 blur-[120px]" />
-        <div className="absolute -right-24 top-1/3 h-[420px] w-[420px] rounded-full bg-fuchsia-600/20 blur-[120px]" />
-        <div className="absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-sky-600/15 blur-[120px]" />
+        <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-indigo-600/30 blur-[100px] sm:blur-[130px]" />
+        <div className="absolute -left-32 top-1/4 h-[460px] w-[460px] rounded-full bg-fuchsia-600/20 blur-[90px] sm:blur-[120px]" />
+        <div className="absolute -right-24 top-1/2 h-[420px] w-[420px] rounded-full bg-sky-600/15 blur-[90px] sm:blur-[120px]" />
+        <div className="absolute -bottom-24 left-[15%] h-[380px] w-[380px] rounded-full bg-violet-600/15 blur-[90px] sm:blur-[110px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(129,140,248,0.08),transparent_55%)]" />
       </div>
 
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050510]/70 backdrop-blur-md">
@@ -45,31 +49,70 @@ export default function Home() {
       </header>
 
       <main className="flex-1">
-        <section className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-16 pt-20 text-center sm:px-6 sm:pb-20 sm:pt-28">
+        <section className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-24 pt-16 text-center sm:px-6 sm:pb-28 sm:pt-24">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 select-none overflow-hidden"
+          >
+            <span className="animate-float-note-slow absolute left-[7%] top-[16%] hidden text-3xl text-indigo-300/40 md:block">
+              ♪
+            </span>
+            <span
+              className="animate-float-note absolute left-[13%] top-[54%] hidden text-2xl text-fuchsia-300/35 md:block"
+              style={{ animationDelay: "1.2s" }}
+            >
+              ♫
+            </span>
+            <span
+              className="animate-float-note absolute right-[9%] top-[20%] hidden text-2xl text-sky-300/40 md:block"
+              style={{ animationDelay: "0.6s" }}
+            >
+              ♬
+            </span>
+            <span
+              className="animate-float-note-slow absolute right-[15%] top-[58%] hidden text-3xl text-violet-300/35 md:block"
+              style={{ animationDelay: "2s" }}
+            >
+              ♪
+            </span>
+            <div className="absolute bottom-[24%] right-[5%] hidden items-end gap-1.5 lg:flex">
+              {[0, 1, 2, 3, 4, 5, 6].map((index) => (
+                <span
+                  key={index}
+                  className="animate-eq w-1.5 rounded-full bg-gradient-to-t from-indigo-500/60 to-fuchsia-400/70"
+                  style={{
+                    height: `${12 + (index % 3) * 9}px`,
+                    animationDelay: `${index * 0.13}s`,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
           <Image
             src={CHANNEL.avatar}
             alt="SuperBGM 채널 아바타"
-            width={120}
-            height={120}
+            width={128}
+            height={128}
             priority
-            className="rounded-full ring-2 ring-white/15 ring-offset-4 ring-offset-[#050510]"
+            className="rounded-full shadow-[0_0_60px_rgba(129,140,248,0.35)] ring-2 ring-white/15 ring-offset-4 ring-offset-[#050510] sm:h-40 sm:w-40"
           />
           <p className="mt-8 text-sm font-medium tracking-widest text-indigo-300">
             {CHANNEL.handle}
           </p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             감성을 깨우는{" "}
             <span className="text-aurora">몽환적인 사운드 공간</span>
           </h1>
-          <p className="mt-6 max-w-2xl whitespace-pre-line text-base leading-7 text-zinc-400 sm:text-lg">
+          <p className="mt-6 max-w-2xl whitespace-pre-line text-base leading-7 text-zinc-400 sm:text-lg sm:leading-8">
             {CHANNEL.description}
           </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
+          <div className="mt-10 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:gap-4">
             <a
               href={CHANNEL.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-7 py-3 font-semibold text-white shadow-lg shadow-indigo-500/25 transition-transform hover:-translate-y-0.5"
+              className="w-full rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-7 py-3 text-center font-semibold text-white shadow-lg shadow-indigo-500/25 transition-transform hover:-translate-y-0.5 sm:w-auto"
             >
               유튜브 구독하기
             </a>
@@ -77,11 +120,53 @@ export default function Home() {
               href={CHANNEL.mp3Site}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass rounded-full px-7 py-3 font-semibold text-zinc-100 transition-transform hover:-translate-y-0.5 hover:border-white/20 hover:text-white"
+              className="glass w-full rounded-full px-7 py-3 text-center font-semibold text-zinc-100 transition-transform hover:-translate-y-0.5 hover:border-white/20 hover:text-white sm:w-auto"
             >
               MP3 다운로드
             </a>
           </div>
+          <dl className="mt-12 flex flex-wrap items-center justify-center gap-3 sm:mt-14 sm:gap-4">
+            <div className="glass min-w-[120px] rounded-2xl px-5 py-3.5">
+              <dt className="sr-only">플레이리스트 수</dt>
+              <dd className="text-2xl font-bold text-white sm:text-3xl">
+                {VIDEOS.length}+
+              </dd>
+              <p className="mt-1 text-xs tracking-wide text-zinc-400">
+                플레이리스트
+              </p>
+            </div>
+            <div className="glass min-w-[120px] rounded-2xl px-5 py-3.5">
+              <dt className="sr-only">감성 무드 수</dt>
+              <dd className="text-2xl font-bold text-white sm:text-3xl">
+                {uniqueMoods}
+              </dd>
+              <p className="mt-1 text-xs tracking-wide text-zinc-400">
+                감성 무드
+              </p>
+            </div>
+          </dl>
+          <a
+            href="#playlists"
+            aria-label="플레이리스트 보기"
+            className="mt-14 inline-flex flex-col items-center gap-1.5 text-zinc-500 transition-colors hover:text-zinc-300 sm:mt-16"
+          >
+            <span className="text-[11px] font-medium tracking-[0.25em]">
+              SCROLL
+            </span>
+            <svg
+              className="animate-bob"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </a>
         </section>
 
         <VideoGallery />
