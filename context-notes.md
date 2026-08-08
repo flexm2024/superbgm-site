@@ -36,7 +36,13 @@
 
 ## 4. 남은 항목 (선택)
 
-- [ ] (선택) OG 이미지 / favicon 교체 (현재 create-next-app 기본값)
+- [x] OG 이미지 / favicon 교체 (2026-08-08 완료)
+  - favicon.ico(`src/app/`), favicon 16/32/96, apple-touch-icon, android-chrome 192/512 (`public/`)
+  - OG: `og-image.png`(1200x630) / `twitter-image.png`(1200x675) / `og-square.png`(1200x1200) — 채널 아바타 + 다크 오로라 테마 + 한글 폰트(Malgun) 커스텀 생성
+  - `layout.tsx`: icons / openGraph / twitter 메타데이터 통합, `metadataBase=https://superbgm-site.vercel.app`
+  - 검증: 빌드/린트 통과, `next start`에서 `/og-image.png`, `/favicon.ico` HTTP 200 확인
+  - ⚠️ 시각 검증: 이 환경에서는 이미지 분석 불가 (사용자 직접 확인 필요, 파일은 `public/` 하위)
+  - ⚠️ `metadataBase`는 배포 URL 기준 — 커스텀 도메인 연결 시 함께 수정 필요
 - [ ] (선택) 데이터 갱신 스크립트로 채널 데이터 최신화
 - [ ] (선택) 커스텀 도메인 연결 (Vercel 대시보드 → Domains) 후 유튜브 채널 링크에 적용
 
