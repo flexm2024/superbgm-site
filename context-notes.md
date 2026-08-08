@@ -1,8 +1,8 @@
 # SuperBGM 채널 홈페이지 — 작업 메모리
 
-> 상태: **랜딩 페이지 구현 + OG/favicon 교체 완료** — 빌드/린트 검증 통과, GitHub 푸시 완료.
-> 배포는 보류 (본인 Vercel 로그인 필요, 재개 가능).
-> 최종 갱신: 2026-08-08
+> 상태: **랜딩 페이지 구현 + OG/favicon 교체 + Vercel 배포 완료** — 빌드/린트 검증 통과, GitHub 푸시 완료.
+> 배포: https://superbgm-site.vercel.app (2026-08-09 프로덕션 배포 완료, HTTP 200 + 자산 검증 통과)
+> 최종 갱신: 2026-08-09
 
 ## 1. 목표
 
@@ -29,12 +29,12 @@
 
 - [x] GitHub 저장소 생성 + 푸시: `flexm2024/superbgm-site` (public) — https://github.com/flexm2024/superbgm-site
 - [x] 배포 전 `npm run build` 재검증 통과 (정적 프리렌더 4/4)
-- [ ] (보류) Vercel 배포 — 본인 계정 로그인 필요. 사용자가 "됐어"로 보류, 원하면 언제든 재개
-  - 방법 A (CLI, 추천): `vercel login` (브라우저 로그인, 본인만 가능) → 이후 `vercel --prod`는 에이전트가 진행 가능 (Vercel CLI v54.12.2 설치됨)
-  - 방법 B (대시보드): https://vercel.com → GitHub 계정(flexm2024) 연결 → `flexm2024/superbgm-site` import → Deploy
-  - 완료 URL: `https://superbgm-site.vercel.app`
-  - 참고: 기본 모드(serverless) 유지가 권장 — `next/image` 최적화가 동작함. `output: 'export'`는 이미지 최적화 비활성화되므로 불필요
-  - 참고: 프로젝트가 `C:\opencode`로 이동했지만 배포와 무관 — Vercel은 GitHub에서 소스를 가져와 빌드함
+- [x] **Vercel 배포 완료 (2026-08-09)** — 사용자 Vercel 로그인 후 재개
+  - `vercel link --yes` → `flex-m-studio/superbgm-site` 연결 (이미 프로젝트 존재, GitHub 연결됨)
+  - `vercel --prod` 배포 성공 — 빌드 7s, Ready in 18s
+  - 배포 URL: `https://superbgm-site-9q2h494rx-flex-m-studio.vercel.app` → 별칭 `https://superbgm-site.vercel.app`
+  - 검증: `/` HTTP 200 (한글 콘텐츠 렌더링), og-image/twitter-image/og-square/favicon 계열/apple-touch-icon/android-chrome 전부 200
+  - 참고: Vercel CLI 로컬 빌드는 Windows상 인코딩 문제 없음, 프로젝트는 `C:\opencode`에 있어도 무관 (GitHub 소스 기반 빌드)
 
 ## 4. 남은 항목 (선택)
 
