@@ -1,7 +1,7 @@
 # SuperBGM 채널 홈페이지 — 작업 메모리
 
-> 상태: **랜딩 페이지 구현 + OG/favicon 교체 + Vercel 배포 완료** — 빌드/린트 검증 통과, GitHub 푸시 완료.
-> 배포: https://superbgm-site.vercel.app (2026-08-09 프로덕션 배포 완료, HTTP 200 + 자산 검증 통과)
+> 상태: **랜딩 페이지 구현 + OG/favicon 교체 + Vercel 배포 + 커스텀 도메인 연결 완료** — 빌드/린트 검증 통과, GitHub 푸시 완료.
+> 사이트: https://superbgm.flexmstudio.com (커스텀 도메인, 2026-08-09) / https://superbgm-site.vercel.app (별칭 유지)
 > 최종 갱신: 2026-08-09
 
 ## 1. 목표
@@ -41,12 +41,15 @@
 - [x] OG 이미지 / favicon 교체 (2026-08-08 완료)
   - favicon.ico(`src/app/`), favicon 16/32/96, apple-touch-icon, android-chrome 192/512 (`public/`)
   - OG: `og-image.png`(1200x630) / `twitter-image.png`(1200x675) / `og-square.png`(1200x1200) — 채널 아바타 + 다크 오로라 테마 + 한글 폰트(Malgun) 커스텀 생성
-  - `layout.tsx`: icons / openGraph / twitter 메타데이터 통합, `metadataBase=https://superbgm-site.vercel.app`
+  - `layout.tsx`: icons / openGraph / twitter 메타데이터 통합
   - 검증: 빌드/린트 통과, `next start`에서 `/og-image.png`, `/favicon.ico` HTTP 200 확인
   - ⚠️ 시각 검증: 이 환경에서는 이미지 분석 불가 (사용자 직접 확인 필요, 파일은 `public/` 하위)
-  - ⚠️ `metadataBase`는 배포 URL 기준 — 커스텀 도메인 연결 시 함께 수정 필요
-- [ ] (선택) 데이터 갱신 스크립트로 채널 데이터 최신화
-- [ ] (선택) 커스텀 도메인 연결 (Vercel 대시보드 → Domains) 후 유튜브 채널 링크에 적용
+- [x] **커스텀 도메인 연결 (2026-08-09 완료)** — `superbgm.flexmstudio.com`
+  - Vercel CLI로 프로젝트에 도메인 등록 → Cloudflare API로 A 레코드 추가 (`superbgm` → `76.76.21.21`, DNS only)
+  - `layout.tsx`: `metadataBase`/openGraph `url`을 `https://superbgm.flexmstudio.com`으로 변경 후 재배포
+  - 검증: https://superbgm.flexmstudio.com HTTP 200, 리다이렉트 없음, HTTPS 인증서 자동 발급됨
+  - ⚠️ 유튜브 채널 링크에 새 주소 적용은 사용자가 YouTube 스튜디오에서 수동 진행 필요
+  - ⚠️ Cloudflare API 토큰(채팅에 공개됨)은 사용 후 **폐기(revoke) 권장**
 
 ## 5. 핵심 제약 (AGENTS.md 준수)
 

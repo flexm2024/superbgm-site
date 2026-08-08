@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://superbgm-site.vercel.app"),
+  metadataBase: new URL("https://superbgm.flexmstudio.com"),
   title: "SuperBGM",
   description:
     "감성을 깨우는 몽환적인 사운드 공간, SuperBGM. 부드럽고 편안한 음악과 꿈처럼 아련한 사운드 트랙을 만나보세요.",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://superbgm-site.vercel.app",
+    url: "https://superbgm.flexmstudio.com",
     siteName: "SuperBGM",
     title: "SuperBGM — 감성을 깨우는 몽환적인 사운드 공간",
     description:
