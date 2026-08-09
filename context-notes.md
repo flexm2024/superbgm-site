@@ -1,9 +1,7 @@
 # SuperBGM 채널 홈페이지 — 작업 메모리
 
-> 상태: **5개 신규 기능(미리듣기 모달 · 오늘의 플레이리스트 · 검색/정렬 · NEW 배지 · CTA 광택) 배포 완료** — 커밋 `863dbad`, https://superbgm.flexmstudio.com 확인 가능
+> 상태: **모바일 히어로 설명 줄바꿈 개선 배포 완료** — 커밋 `60b9cc9`, https://superbgm.flexmstudio.com 확인 가능
 > 진행 중: (없음 — `/hero-samples` 정리 여부는 사용자 확인 대기)
-> 사이트: https://superbgm.flexmstudio.com (커스텀 도메인, 2026-08-09) / https://superbgm-site.vercel.app (별칭 유지)
-> 최종 갱신: 2026-08-09
 
 ## 1. 목표
 
@@ -75,6 +73,12 @@
   - 검증: lint 통과 · build EXIT 0 · 로컬 스모크 200 (오늘의 플레이리스트·미리듣기·btn-shine·검색·정렬 렌더링) · **프로덕션 Playwright 인터랙션 전부 통과**: 모달 오픈(`embed/UPM_sGfZsuU?autoplay=1`)→ESC/백드롭 닫기+스크롤락 복원, 검색 "여름"→3건(제목 전부 매칭), 조회수순→1.1천회(겨울 발라드) 1위+aria-pressed, NEW 3개, "다른 추천" 변경+미리듣기 모달(embed/88IS8I8VGvI)
   - ⚠️ 로컬 검증 시 이전 세션 고아 dev 서버(포트 3000 점유, 12:04 시작)가 스테일 코드를 서빙해 헷갈림 → `Stop-Process`로 종료 후 재검증 완료. 이후 확인 시 포트 점유 프로세스부터 체크할 것
   - `.gitignore`에 `.playwright-mcp/` 추가 (Playwright MCP 스크린샷/스냅샷 아티팩트)
+
+- [x] **모바일 히어로 설명 줄바꿈 개선 (2026-08-09 구현 → 커밋 `60b9cc9` → push → 배포 완료)** — 사용자 "부드럽고 편안한 음악 라인까지만 잡고 다음 줄로"
+  - 문제: 모바일(375px)에서 히어로 설명 2번째 문단이 "사운드 트 / 랙을 선보입니다"처럼 단어 중간에서 잘림
+  - 수정: `premium-hero.tsx` — `CHANNEL.description`을 `\n` 기준 문단 분리 + 2번째 문단을 `"음악,"` 기준 분할, 그 뒤에 `<br className="sm:hidden">` 삽입 → 모바일에서 "이곳에서는 부드럽고 편안한 음악," / "꿈처럼 아련한 사운드 트랙을 선보입니다." 줄바꿈 (데스크톱은 `<br>` 숨김 → 원본 4줄 유지)
+  - 검증: build EXIT 0 · lint/diagnostics 에러 0 · Playwright 375px 5줄 확인(단어 잘림 없음) + 1280px 4줄 회귀 없음 + 프로덕션 재검증
+  - 배포: `vercel --prod` Ready 42s → https://superbgm.flexmstudio.com 375px 확인 완료
 
 ## 3. 배포 준비 (2026-08-08 완료)
 
