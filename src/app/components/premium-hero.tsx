@@ -27,7 +27,7 @@ const BARS = Array.from({ length: 56 }, (_, index) => ({
 
 export function PremiumHero() {
   return (
-    <section className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-28 pt-20 text-center sm:px-6 sm:pt-28">
+    <section className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-20 pt-20 text-center sm:px-6 sm:pb-28 sm:pt-28">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 select-none overflow-hidden"
@@ -52,7 +52,7 @@ export function PremiumHero() {
         <span className="animate-float-note-slow absolute right-[12%] top-[45%] hidden select-none text-3xl text-[#ec4899]/40 md:block">
           ♫
         </span>
-        <div className="absolute inset-x-0 bottom-0 flex h-24 items-center justify-center gap-[3px] overflow-hidden opacity-60">
+        <div className="absolute inset-x-0 bottom-0 flex h-16 items-center justify-center gap-[3px] overflow-hidden opacity-60 sm:h-24">
           {BARS.map((bar, index) => (
             <span
               key={index}
@@ -84,7 +84,7 @@ export function PremiumHero() {
       </Reveal>
 
       <Reveal delay={160}>
-        <h1 className="mt-5 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl">
+        <h1 className="mt-5 break-keep text-4xl font-bold leading-[1.15] tracking-tight sm:text-6xl sm:leading-[1.05] lg:text-7xl xl:text-8xl">
           <span className="text-slate-900">
             감성을 깨우는
           </span>
@@ -96,13 +96,13 @@ export function PremiumHero() {
       </Reveal>
 
       <Reveal delay={240}>
-        <p className="mt-7 max-w-2xl whitespace-pre-line text-base leading-8 text-slate-500 sm:text-lg sm:leading-9">
+        <p className="mt-6 max-w-2xl whitespace-pre-line text-sm leading-6 text-slate-500 sm:mt-7 sm:text-lg sm:leading-9">
           {CHANNEL.description}
         </p>
       </Reveal>
 
-      <Reveal delay={320}>
-        <div className="mt-11 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:gap-4">
+      <Reveal delay={320} className="w-full">
+        <div className="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:mt-11 sm:w-auto sm:flex-row sm:gap-4">
           <a
             href={CHANNEL.url}
             target="_blank"
@@ -117,7 +117,7 @@ export function PremiumHero() {
       <a
         href="#featured"
         aria-label="추천 플레이리스트 보기"
-        className="mt-16 inline-flex flex-col items-center gap-1.5 text-slate-400 transition-colors hover:text-slate-600"
+        className="mt-12 inline-flex flex-col items-center gap-1.5 text-slate-400 transition-colors hover:text-slate-600 sm:mt-16"
       >
         <span className="text-[11px] font-medium tracking-[0.25em]">SCROLL</span>
         <svg

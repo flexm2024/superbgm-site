@@ -30,7 +30,7 @@ export function TodayPlaylist() {
   return (
     <section
       id="today"
-      className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 pb-4 pt-16 sm:px-6 sm:pt-24"
+      className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 pb-4 pt-8 sm:px-6 sm:pt-24"
     >
       <Reveal>
         <div className="relative overflow-hidden rounded-3xl bg-white/50 p-6 shadow-[0_16px_50px_-24px_rgba(40,96,255,0.25)] ring-1 ring-indigo-100/80 sm:p-10">
