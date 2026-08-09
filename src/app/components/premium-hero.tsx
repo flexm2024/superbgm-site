@@ -3,18 +3,22 @@ import Image from "next/image";
 import { CHANNEL } from "@/lib/channel";
 import { Reveal } from "./reveal";
 
-const PARTICLES = Array.from({ length: 18 }, (_, index) => ({
-  left: `${(index * 7.3 + 4) % 92}%`,
-  top: `${(index * 13.7 + 6) % 78}%`,
-  size: 3 + (index % 3) * 2,
-  delay: `${(index % 5) * 0.9}s`,
-  color:
-    index % 3 === 0
-      ? "bg-[#6b8fff]/70"
-      : index % 3 === 1
-        ? "bg-violet-400/60"
-        : "bg-sky-400/60",
-}));
+const PARTICLES = Array.from({ length: 30 }, (_, index) => {
+  const palette = [
+    { color: "bg-[#2860ff]/90", glow: "rgba(40,96,255,0.55)" },
+    { color: "bg-[#8b5cf6]/90", glow: "rgba(139,92,246,0.55)" },
+    { color: "bg-[#ec4899]/85", glow: "rgba(236,72,153,0.5)" },
+    { color: "bg-[#38bdf8]/90", glow: "rgba(56,189,248,0.55)" },
+  ];
+  const p = palette[index % palette.length];
+  return {
+    left: `${(index * 3.7 + 4) % 92}%`,
+    top: `${(index * 11.3 + 5) % 76}%`,
+    size: 4 + (index % 4) * 2,
+    delay: `${(index % 6) * 0.8}s`,
+    ...p,
+  };
+});
 
 const BARS = Array.from({ length: 56 }, (_, index) => ({
   height: 10 + Math.abs(Math.sin(index * 0.45)) * 44,
@@ -37,6 +41,7 @@ export function PremiumHero() {
               top: particle.top,
               width: `${particle.size}px`,
               height: `${particle.size}px`,
+              boxShadow: `0 0 ${particle.size * 2}px ${particle.glow}`,
               animationDelay: particle.delay,
             }}
           />
