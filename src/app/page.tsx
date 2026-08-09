@@ -28,11 +28,11 @@ export default function Home() {
             <Image
               src="/로고.png"
               alt="SuperBGM 로고"
-              width={40}
-              height={40}
-              className="h-10 w-10 rounded-full ring-2 ring-indigo-200 shadow-[0_0_20px_rgba(40,96,255,0.3)]"
+              width={56}
+              height={56}
+              className="h-12 w-12 rounded-full ring-2 ring-indigo-200 shadow-[0_0_24px_rgba(40,96,255,0.35)] sm:h-14 sm:w-14"
             />
-            <span className="text-lg font-semibold text-slate-900">
+            <span className="text-xl font-semibold text-slate-900 sm:text-2xl">
               Super<span className="text-aurora">BGM</span>
             </span>
           </a>
