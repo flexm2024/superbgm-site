@@ -1,7 +1,7 @@
 # SuperBGM 채널 홈페이지 — 작업 메모리
 
-> 상태: **랜딩 + 로고 적용 + 움직이는 히어로(오로라 텍스트) 적용 완료, 프리미엄 리디자인 미리보기 `/premium` 배포 완료** — 실주소에서 확인 가능.
-> 진행 중: **프리미엄 리디자인 — 사용자 `/premium` 확인 대기 (확정 시 `/`로 승격)**
+> 상태: **프리미엄 리디자인 메인 승격 완료 (`/` 적용, `/premium` → `/` 리다이렉트)** — 실주소에서 확인 가능.
+> 진행 중: (없음 — MP3 링크 주소 확인 · `/hero-samples` 정리 여부는 사용자 확인 대기)
 > 사이트: https://superbgm.flexmstudio.com (커스텀 도메인, 2026-08-09) / https://superbgm-site.vercel.app (별칭 유지)
 > 최종 갱신: 2026-08-09
 
@@ -49,7 +49,12 @@
   - 검증: 빌드 EXIT 0 (10 라우트 프리렌더) · lint 통과 · lsp 에러 0 · `next start -p 3210`에서 /premium HTTP 200 + 전 섹션 문구 렌더링 확인, `/` 회귀 없음
   - ⚠️ 로컬 포트 3000은 다른 앱("Claude Code Chat")이 점유 — 로컬 확인 시 3210 등 다른 포트 사용
   - 배포: 커밋 `5ccaba2` → GitHub 푸시 → `vercel --prod` (Ready 34s, 빌드 10s) → https://superbgm.flexmstudio.com/premium HTTP 200 + 전 섹션 렌더링 확인, `/` 회귀 없음
-  - ⚠️ **메인 `/` 승격은 사용자 확정 후 진행**
+  - ⚠️ **메인 `/` 승격은 사용자 확정 후 진행** → ✅ 확정("가자")되어 완료 — 아래 "메인 승격" 항목 참조
+- [x] **프리미엄 리디자인 메인 승격 (완료, 2026-08-09)** — 사용자 "가자" 승인
+  - 컴포넌트 8종 + `stats.ts`를 `src/app/components/`·`src/lib/`로 이동 (import `../lib/stats` → `@/lib/stats`), 새 `src/app/page.tsx` 작성(프리미엄 디자인, 페이지 metadata 오버라이드 제거 → layout.tsx 기본 메타 사용), `premium-footer`의 "기존 홈 보기" 링크 제거
+  - `/premium`은 `redirect("/")`(307)로 교체, 구 `src/app/premium/components`·`lib` 삭제
+  - 검증: 빌드 EXIT 0 (10 라우트) · lint 통과 · lsp 에러 0 · 로컬 `next start -p 3210`에서 `/` premium 콘텐츠 렌더 + `/premium` 307 리다이렉트 확인, `/hero-samples` 200 회귀 없음
+  - 배포: 커밋 `30117b1` → push → `vercel --prod` (Ready 34s) → https://superbgm.flexmstudio.com `/` 200 (히어로·TOP3·무드·스토리 문구 렌더링) + `/premium` 307 → `/` 확인
 
 ## 3. 배포 준비 (2026-08-08 완료)
 
