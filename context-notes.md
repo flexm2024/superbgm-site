@@ -1,6 +1,6 @@
 # SuperBGM 채널 홈페이지 — 작업 메모리
 
-> 상태: **프리미엄 리디자인 메인 승격 완료 (`/` 적용, `/premium` → `/` 리다이렉트)** — 실주소에서 확인 가능.
+> 상태: **프리미엄 리디자인 메인 승격 + 라이트 컨셉 전환 완료** (`/` 적용, `/premium` → `/` 리다이렉트) — 실주소에서 확인 가능.
 > 진행 중: (없음 — MP3 링크 주소 확인 · `/hero-samples` 정리 여부는 사용자 확인 대기)
 > 사이트: https://superbgm.flexmstudio.com (커스텀 도메인, 2026-08-09) / https://superbgm-site.vercel.app (별칭 유지)
 > 최종 갱신: 2026-08-09
@@ -55,6 +55,11 @@
   - `/premium`은 `redirect("/")`(307)로 교체, 구 `src/app/premium/components`·`lib` 삭제
   - 검증: 빌드 EXIT 0 (10 라우트) · lint 통과 · lsp 에러 0 · 로컬 `next start -p 3210`에서 `/` premium 콘텐츠 렌더 + `/premium` 307 리다이렉트 확인, `/hero-samples` 200 회귀 없음
   - 배포: 커밋 `30117b1` → push → `vercel --prod` (Ready 34s) → https://superbgm.flexmstudio.com `/` 200 (히어로·TOP3·무드·스토리 문구 렌더링) + `/premium` 307 → `/` 확인
+- [x] **라이트 컨셉 전환 (완료, 2026-08-09)** — 사용자 "어두운 색보다 밝은 색 선호" + 참고 사이트 https://flexmstudio.com/ (커밋 `f6a5063`)
+  - 참고 사이트 분석: Vite React SPA — CSS에서 팔레트 추출: 배경 화이트~옅은 블루(`#f4f7ff`/`#f8fafc`), 주 액센트 로열 블루 `#2860ff`(+`#6b8fff`/`#5585ff`), 보조 `#20cc80`(그린)/`#f5b942`(앰버)/`#ff5c72`(코랄), Paperlogy 폰트, 밝고 깔끔한 모던 미니멀
+  - 적용: `--background #050510`→`#f6f8ff`, `--foreground`→`#1e293b`, body `bg-[#f6f8ff] text-slate-700`, `.glass` 라이트(white/65 + indigo-100 테두리 + 블루 소프트 섀도), `.text-aurora` 선명화(`#2860ff → #8b5cf6 → #ec4899`), CTA/칩/버튼 `from-[#2860ff] to-[#6b8fff]`, 헤더/푸터 화이트 배경 + indigo-100 테두리, 오로라 블롭 파스텔(blue/violet/sky/pink-300), 카드 white + ring-indigo-100, 히어로 대형 타이포 `text-slate-900`
+  - 검증: 빌드 EXIT 0 · lint 통과 · lsp 에러 0 · 로컬 3210 라이트 배경/블루 프라이머리 확인 + `050510` 완전 제거 · 프로덕션 `/` 200 (블루 프라이머리·전 섹션 렌더링, 다크 잔재 없음)
+  - ⚠️ 주의: `/hero-samples` 4종은 여전히 다크 스타일(별도 라우트) — 삭제 결정 대기 중, 삭제 시 함께 정리됨
 
 ## 3. 배포 준비 (2026-08-08 완료)
 
