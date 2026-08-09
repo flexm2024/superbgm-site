@@ -1,6 +1,6 @@
-// 프리미엄 미리보기 스탯 밴드: 채널 수치를 대형 타이포로 보여주는 섹션
+// 스탯 밴드: 채널 수치를 대형 타이포로 보여주는 섹션
 import { VIDEOS } from "@/lib/channel";
-import { TOTAL_MOODS, TOTAL_VIEWS, formatCompact } from "../lib/stats";
+import { TOTAL_MOODS, TOTAL_VIEWS, formatCompact } from "@/lib/stats";
 import { Reveal } from "./reveal";
 
 const STATS = [

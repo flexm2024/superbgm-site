@@ -1,7 +1,7 @@
-// 프리미엄 미리보기 추천 쇼케이스: 조회수 상위 3개 플레이리스트를 앨범아트 카드로
+// 추천 쇼케이스: 조회수 상위 3개 플레이리스트를 앨범아트 카드로
 "use client";
 
-import { TOP_VIDEOS } from "../lib/stats";
+import { TOP_VIDEOS } from "@/lib/stats";
 import { videoUrl } from "@/lib/channel";
 import { Reveal } from "./reveal";
 import { VideoThumb } from "./video-thumb";

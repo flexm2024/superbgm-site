@@ -1,4 +1,4 @@
-// 프리미엄 미리보기 통계 유틸: 조회수 파싱·합산, 상위 영상, 무드 집계
+// SuperBGM 통계 유틸: 조회수 파싱·합산, 상위 영상, 무드 집계
 import { VIDEOS, type Video, type VideoTag } from "@/lib/channel";
 
 export function parseViews(views: string): number {

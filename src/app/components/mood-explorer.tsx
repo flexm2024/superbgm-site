@@ -1,9 +1,9 @@
-// 프리미엄 미리보기 무드 탐색: 무드 칩 필터 + 플레이리스트 그리드 클라이언트 컴포넌트
+// 무드 탐색: 무드 칩 필터 + 플레이리스트 그리드 클라이언트 컴포넌트
 "use client";
 
 import { useMemo, useState } from "react";
 import { VIDEOS, videoUrl, type VideoTag } from "@/lib/channel";
-import { MOOD_COUNTS } from "../lib/stats";
+import { MOOD_COUNTS } from "@/lib/stats";
 import { Reveal } from "./reveal";
 import { VideoThumb } from "./video-thumb";
 

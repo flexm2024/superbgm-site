@@ -1,7 +1,7 @@
-// 프리미엄 미리보기 히어로: 시네마틱 오로라 조명 + 파티클 + 대형 타이포
+// 프리미엄 히어로: 시네마틱 오로라 조명 + 파티클 + 대형 타이포
 import Image from "next/image";
 import { CHANNEL, VIDEOS } from "@/lib/channel";
-import { TOTAL_MOODS, TOTAL_VIEWS, formatCompact } from "../lib/stats";
+import { TOTAL_MOODS, TOTAL_VIEWS, formatCompact } from "@/lib/stats";
 import { Reveal } from "./reveal";
 
 const PARTICLES = Array.from({ length: 18 }, (_, index) => ({

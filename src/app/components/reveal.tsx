@@ -1,4 +1,4 @@
-// 프리미엄 스크롤 리빌: IntersectionObserver 기반 페이드/슬라이드 인 클라이언트 컴포넌트
+// 스크롤 리빌: IntersectionObserver 기반 페이드/슬라이드 인 클라이언트 컴포넌트
 "use client";
 
 import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";

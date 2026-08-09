@@ -1,6 +1,5 @@
-// 프리미엄 미리보기 푸터: 브랜드와 채널 링크
+// 프리미엄 푸터: 브랜드와 채널 링크
 import Image from "next/image";
-import Link from "next/link";
 import { CHANNEL } from "@/lib/channel";
 
 export function PremiumFooter() {
@@ -44,9 +43,6 @@ export function PremiumFooter() {
           >
             MP3 다운로드
           </a>
-          <Link href="/" className="text-zinc-400 transition-colors hover:text-white">
-            기존 홈 보기
-          </Link>
         </div>
       </div>
       <div className="mx-auto mt-10 flex w-full max-w-6xl justify-center border-t border-white/5 px-4 pt-6 sm:px-6">

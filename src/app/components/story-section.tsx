@@ -1,4 +1,4 @@
-// 프리미엄 미리보기 스토리 섹션: 채널 소개와 구독 CTA
+// 스토리 섹션: 채널 소개와 구독 CTA
 import { CHANNEL } from "@/lib/channel";
 import { Reveal } from "./reveal";
 

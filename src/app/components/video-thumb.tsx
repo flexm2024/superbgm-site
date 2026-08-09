@@ -1,4 +1,4 @@
-// 프리미엄 영상 썸네일: maxres 우선, 로드 실패 시 hq로 폴백하는 클라이언트 컴포넌트
+// 영상 썸네일: maxres 우선, 로드 실패 시 hq로 폴백하는 클라이언트 컴포넌트
 "use client";
 
 import Image from "next/image";
