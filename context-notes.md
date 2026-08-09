@@ -60,6 +60,11 @@
   - 적용: `--background #050510`→`#f6f8ff`, `--foreground`→`#1e293b`, body `bg-[#f6f8ff] text-slate-700`, `.glass` 라이트(white/65 + indigo-100 테두리 + 블루 소프트 섀도), `.text-aurora` 선명화(`#2860ff → #8b5cf6 → #ec4899`), CTA/칩/버튼 `from-[#2860ff] to-[#6b8fff]`, 헤더/푸터 화이트 배경 + indigo-100 테두리, 오로라 블롭 파스텔(blue/violet/sky/pink-300), 카드 white + ring-indigo-100, 히어로 대형 타이포 `text-slate-900`
   - 검증: 빌드 EXIT 0 · lint 통과 · lsp 에러 0 · 로컬 3210 라이트 배경/블루 프라이머리 확인 + `050510` 완전 제거 · 프로덕션 `/` 200 (블루 프라이머리·전 섹션 렌더링, 다크 잔재 없음)
   - ⚠️ 주의: `/hero-samples` 4종은 여전히 다크 스타일(별도 라우트) — 삭제 결정 대기 중, 삭제 시 함께 정리됨
+- [x] **프리텐다드 폰트 적용 (완료, 2026-08-09)** — 사용자 "폰트는 프리스텐다드(프리텐다드)" 요청 (커밋 `d1d61be`)
+  - 자체 호스팅: `public/fonts/PretendardVariable.woff2` (2.06MB, v1.3.9 단일 변수 폰트, weight 45–920, WOFF2 매직 확인) — 완전 정적 사이트 제약 유지(외부 CDN 의존 없음)
+  - `globals.css`: `@font-face "Pretendard Variable"` + `@theme --font-sans`/`--font-mono` 교체, body `font-family: var(--font-sans)`
+  - `layout.tsx`: Geist/Geist_Mono(next/font/google) 제거, html className에서 변수 정리 — 불필요한 폰트 다운로드 제거
+  - 검증: 빌드 EXIT 0 · lint 통과 · 로컬/프로덕션 폰트 파일 200(font/woff2) · CSS 번들에 Pretendard @font-face 포함 + Geist 잔재 없음
 
 ## 3. 배포 준비 (2026-08-08 완료)
 
