@@ -1,7 +1,13 @@
 // 프리미엄 히어로: 시네마틱 오로라 조명 + 파티클 + 대형 타이포 + 오디오 웨이브
+import { Fragment } from "react";
 import Image from "next/image";
 import { CHANNEL } from "@/lib/channel";
 import { Reveal } from "./reveal";
+
+// 설명 텍스트를 문단 단위로 분리 (모바일 줄바꿈 제어용)
+const DESCRIPTION_LINES = CHANNEL.description.split("\n");
+// 2번째 문단을 "음악," 기준으로 분할 → 모바일에서 그 뒤에 줄바꿈 삽입
+const [SECOND_HEAD, SECOND_TAIL] = (DESCRIPTION_LINES[1] ?? "").split("음악,");
 
 const PARTICLES = Array.from({ length: 30 }, (_, index) => {
   const palette = [
@@ -97,7 +103,20 @@ export function PremiumHero() {
 
       <Reveal delay={240}>
         <p className="mt-6 max-w-2xl whitespace-pre-line text-sm leading-6 text-slate-500 sm:mt-7 sm:text-lg sm:leading-9">
-          {CHANNEL.description}
+          {DESCRIPTION_LINES.map((line, index) => (
+            <Fragment key={index}>
+              {index > 0 && "\n"}
+              {index === 1 && SECOND_TAIL !== undefined ? (
+                <>
+                  {SECOND_HEAD}음악,
+                  <br className="sm:hidden" />
+                  {SECOND_TAIL.trimStart()}
+                </>
+              ) : (
+                line
+              )}
+            </Fragment>
+          ))}
         </p>
       </Reveal>
 
