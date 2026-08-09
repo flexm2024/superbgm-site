@@ -47,7 +47,7 @@ export function MoodExplorer() {
   return (
     <section
       id="moods"
-      className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24"
+      className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 py-16 sm:px-6 sm:py-24"
     >
       <Reveal>
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-indigo-300">

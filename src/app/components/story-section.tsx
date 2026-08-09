@@ -6,7 +6,7 @@ export function StorySection() {
   return (
     <section
       id="story"
-      className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24"
+      className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 py-16 sm:px-6 sm:py-24"
     >
       <Reveal>
         <div className="relative overflow-hidden rounded-3xl p-8 sm:p-14">

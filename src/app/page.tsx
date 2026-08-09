@@ -24,7 +24,7 @@ export default function Home() {
       </div>
 
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050510]/70 backdrop-blur-md">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
+        <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
           <a href="#" className="flex items-center gap-3">
             <Image
               src="/로고.png"
