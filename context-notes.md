@@ -1,7 +1,7 @@
 # SuperBGM 채널 홈페이지 — 작업 메모리
 
-> 상태: **랜딩 페이지 구현 + OG/favicon 교체 + Vercel 배포 + 커스텀 도메인 연결 + 히어로 업그레이드 + 로고 적용 완료** — 빌드/린트 검증 통과, GitHub 푸시 완료.
-> 진행 중: 없음 (로고 적용 완료, 시각 확인만 사용자 대기)
+> 상태: **랜딩 페이지 구현 + OG/favicon 교체 + Vercel 배포 + 커스텀 도메인 연결 + 히어로 업그레이드 + 로고 적용 + 움직이는 히어로(오로라 텍스트) 적용 완료** — 빌드/린트 검증 통과, GitHub 푸시 완료.
+> 진행 중: 없음 (샘플 히어로 4종은 `/hero-samples`에 보관 — 메인은 ② 오로라 텍스트 선택)
 > 사이트: https://superbgm.flexmstudio.com (커스텀 도메인, 2026-08-09) / https://superbgm-site.vercel.app (별칭 유지)
 > 최종 갱신: 2026-08-09
 
@@ -37,6 +37,10 @@
   - 적용: 히어로 아바타(`page.tsx`, `src={CHANNEL.avatar}` → `src="/로고.png"`) + 헤더(로고 32px 원형 + 텍스트 "SuperBGM" 병행) — `src/lib/channel.ts`는 수정하지 않음
   - 검증: 빌드/린트 통과, lsp 에러 0, 배포 완료(Ready 17s), https://superbgm.flexmstudio.com HTTP 200, 페이지 내 로고 PNG 참조 확인, 로고 이미지 자체 200(image/png, 1,497,476 bytes)
   - ⚠️ 시각 확인: 이 모델은 이미지 입력 미지원(Read/look_at 불가) → 로고가 실제로 예쁘게 보이는지는 **사용자 직접 확인 필요**
+- [x] **움직이는 히어로 (완료, 2026-08-09)** — 사용자가 샘플 4종 중 **② 오로라 텍스트 + 파티클** 선택
+  - 샘플 4종 구현: `/hero-samples` 라우트 (vinyl LP 디스크 / gradient 오로라 텍스트 / parallax 마우스 3D / wave 웨이브 배너) — 공통 셸 `src/app/components/hero-sample-shell.tsx`, CSS 애니메이션 `globals.css`에 추가(`spin-slow`/`aurora-shimmer`/`float-particle`/`.vinyl-disc`), 샘플은 메인에 미적용 상태로 유지
+  - 메인 적용: `page.tsx` — h1을 오로라 시머 2줄 텍스트(`text-aurora animate-aurora-text`)로 교체, 음표/이퀄라이저 장식 제거 → 빛 파티클 14개(`animate-float-particle`)로 대체. 통계 배지·SCROLL 인디케이터는 유지
+  - 검증: 빌드 EXIT 0 · lint 통과 · lsp 에러 0 · 배포 완료(Ready 23s) · https://superbgm.flexmstudio.com HTTP 200 + `animate-aurora-text`/`animate-float-particle`/SCROLL/통계 문구 렌더링 확인, 음표 클래스 제거 확인
 
 ## 3. 배포 준비 (2026-08-08 완료)
 

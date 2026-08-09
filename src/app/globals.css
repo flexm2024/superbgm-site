@@ -51,6 +51,56 @@ body {
   .animate-bob {
     animation: bob 2.4s ease-in-out infinite;
   }
+
+  .animate-float-particle {
+    animation: float-particle 6s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 14s linear infinite;
+  }
+
+  .animate-aurora-text {
+    background-size: 200% auto;
+    animation: aurora-shimmer 6s ease-in-out infinite;
+  }
+
+  .vinyl-disc {
+    background:
+      radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.1), transparent 38%),
+      repeating-radial-gradient(circle, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 3px),
+      #0c0c17;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes aurora-shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float-particle {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-32px) translateX(10px);
+    opacity: 0.9;
+  }
 }
 
 @keyframes float-note {
@@ -87,7 +137,10 @@ body {
   .animate-float-note,
   .animate-float-note-slow,
   .animate-eq,
-  .animate-bob {
+  .animate-bob,
+  .animate-spin-slow,
+  .animate-aurora-text,
+  .animate-float-particle {
     animation: none;
   }
 }

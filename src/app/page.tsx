@@ -4,6 +4,19 @@ import { VideoGallery } from "@/app/components/video-gallery";
 
 const uniqueMoods = new Set(VIDEOS.flatMap((video) => video.tags)).size;
 
+const PARTICLES = Array.from({ length: 14 }, (_, index) => ({
+  left: `${(index * 7.3 + 4) % 92}%`,
+  top: `${(index * 13.7 + 6) % 78}%`,
+  size: 3 + (index % 3) * 2,
+  delay: `${(index % 5) * 0.9}s`,
+  color:
+    index % 3 === 0
+      ? "bg-indigo-300/50"
+      : index % 3 === 1
+        ? "bg-fuchsia-300/45"
+        : "bg-sky-300/45",
+}));
+
 export default function Home() {
   return (
     <>
@@ -63,39 +76,19 @@ export default function Home() {
             aria-hidden
             className="pointer-events-none absolute inset-0 select-none overflow-hidden"
           >
-            <span className="animate-float-note-slow absolute left-[7%] top-[16%] hidden text-3xl text-indigo-300/40 md:block">
-              ♪
-            </span>
-            <span
-              className="animate-float-note absolute left-[13%] top-[54%] hidden text-2xl text-fuchsia-300/35 md:block"
-              style={{ animationDelay: "1.2s" }}
-            >
-              ♫
-            </span>
-            <span
-              className="animate-float-note absolute right-[9%] top-[20%] hidden text-2xl text-sky-300/40 md:block"
-              style={{ animationDelay: "0.6s" }}
-            >
-              ♬
-            </span>
-            <span
-              className="animate-float-note-slow absolute right-[15%] top-[58%] hidden text-3xl text-violet-300/35 md:block"
-              style={{ animationDelay: "2s" }}
-            >
-              ♪
-            </span>
-            <div className="absolute bottom-[24%] right-[5%] hidden items-end gap-1.5 lg:flex">
-              {[0, 1, 2, 3, 4, 5, 6].map((index) => (
-                <span
-                  key={index}
-                  className="animate-eq w-1.5 rounded-full bg-gradient-to-t from-indigo-500/60 to-fuchsia-400/70"
-                  style={{
-                    height: `${12 + (index % 3) * 9}px`,
-                    animationDelay: `${index * 0.13}s`,
-                  }}
-                />
-              ))}
-            </div>
+            {PARTICLES.map((particle, index) => (
+              <span
+                key={index}
+                className={`animate-float-particle absolute rounded-full ${particle.color}`}
+                style={{
+                  left: particle.left,
+                  top: particle.top,
+                  width: `${particle.size}px`,
+                  height: `${particle.size}px`,
+                  animationDelay: particle.delay,
+                }}
+              />
+            ))}
           </div>
 
           <Image
@@ -109,9 +102,14 @@ export default function Home() {
           <p className="mt-8 text-sm font-medium tracking-widest text-indigo-300">
             {CHANNEL.handle}
           </p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            감성을 깨우는{" "}
-            <span className="text-aurora">몽환적인 사운드 공간</span>
+          <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+            <span className="text-aurora animate-aurora-text">
+              감성을 깨우는 몽환적인
+            </span>
+            <br />
+            <span className="text-aurora animate-aurora-text">
+              사운드 공간
+            </span>
           </h1>
           <p className="mt-6 max-w-2xl whitespace-pre-line text-base leading-7 text-zinc-400 sm:text-lg sm:leading-8">
             {CHANNEL.description}
