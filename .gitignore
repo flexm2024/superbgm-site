@@ -36,6 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# opencode / omo session tracking
+.omo/
+
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
