@@ -37,7 +37,7 @@ export default function Home() {
               Super<span className="text-aurora">BGM</span>
             </span>
           </a>
-          <nav className="flex items-center gap-6 text-sm text-slate-500">
+          <nav className="flex items-center gap-6 text-sm font-bold text-slate-500">
             <a
               href="#featured"
               className="hidden transition-colors hover:text-slate-900 sm:inline"
