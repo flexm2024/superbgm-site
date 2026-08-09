@@ -39,6 +39,9 @@ yarn-error.log*
 # opencode / omo session tracking
 .omo/
 
+# playwright mcp artifacts
+.playwright-mcp/
+
 
 # typescript
 *.tsbuildinfo

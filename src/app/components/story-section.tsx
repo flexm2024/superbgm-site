@@ -31,7 +31,7 @@ export function StorySection() {
               href={CHANNEL.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-6 py-2.5 font-semibold text-white shadow-[0_8px_28px_-8px_rgba(40,96,255,0.5)] transition-all hover:-translate-y-0.5"
+              className="btn-shine inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-6 py-2.5 font-semibold text-white shadow-[0_8px_28px_-8px_rgba(40,96,255,0.5)] transition-all hover:-translate-y-0.5"
             >
               채널 보러가기
             </a>

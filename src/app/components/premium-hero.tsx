@@ -107,7 +107,7 @@ export function PremiumHero() {
             href={CHANNEL.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-8 py-3.5 text-center font-semibold text-white shadow-[0_8px_32px_-8px_rgba(40,96,255,0.6)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_44px_-8px_rgba(40,96,255,0.7)] sm:w-auto"
+            className="btn-shine w-full rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-8 py-3.5 text-center font-semibold text-white shadow-[0_8px_32px_-8px_rgba(40,96,255,0.6)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_44px_-8px_rgba(40,96,255,0.7)] sm:w-auto"
           >
             유튜브 구독하기
           </a>

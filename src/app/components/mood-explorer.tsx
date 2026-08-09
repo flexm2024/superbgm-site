@@ -1,13 +1,15 @@
-// 무드 탐색: 무드 칩 필터 + 플레이리스트 그리드 클라이언트 컴포넌트
+// 무드 탐색: 검색 + 무드 칩 필터 + 정렬 + 미리듣기 모달이 있는 플레이리스트 그리드 클라이언트 컴포넌트
 "use client";
 
 import { useMemo, useState } from "react";
-import { VIDEOS, videoUrl, type VideoTag } from "@/lib/channel";
-import { MOOD_COUNTS } from "@/lib/stats";
+import { VIDEOS, videoUrl, type Video, type VideoTag } from "@/lib/channel";
+import { MOOD_COUNTS, parseViews } from "@/lib/stats";
 import { Reveal } from "./reveal";
 import { VideoThumb } from "./video-thumb";
+import { VideoPreviewModal } from "./video-preview-modal";
 
 type Filter = VideoTag | "all";
+type SortMode = "recent" | "views";
 
 const TAG_LABELS: Record<VideoTag, string> = {
   ballad: "발라드",
@@ -33,16 +35,35 @@ const FILTERS: { value: Filter; label: string; count: number }[] = [
   ),
 ];
 
+const SORT_OPTIONS: { value: SortMode; label: string }[] = [
+  { value: "recent", label: "최신순" },
+  { value: "views", label: "조회수순" },
+];
+
+function isNew(video: Video): boolean {
+  return video.published === "1개월 전";
+}
+
 export function MoodExplorer() {
   const [active, setActive] = useState<Filter>("all");
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<SortMode>("recent");
+  const [activeVideo, setActiveVideo] = useState<Video | null>(null);
 
-  const filtered = useMemo(
-    () =>
+  const filtered = useMemo(() => {
+    const base =
       active === "all"
-        ? VIDEOS
-        : VIDEOS.filter((video) => video.tags.includes(active)),
-    [active],
-  );
+        ? [...VIDEOS]
+        : VIDEOS.filter((video) => video.tags.includes(active));
+    const keyword = query.trim().toLowerCase();
+    const list = keyword
+      ? base.filter((video) => video.title.toLowerCase().includes(keyword))
+      : base;
+    if (sort === "views") {
+      list.sort((a, b) => parseViews(b.views) - parseViews(a.views));
+    }
+    return list;
+  }, [active, query, sort]);
 
   return (
     <section
@@ -63,7 +84,59 @@ export function MoodExplorer() {
       </Reveal>
 
       <Reveal delay={80}>
-        <div className="mt-9 flex flex-wrap gap-2">
+        <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="relative flex-1">
+            <svg
+              className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="M21 21l-4.3-4.3" />
+            </svg>
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="플레이리스트 제목 검색"
+              aria-label="플레이리스트 제목 검색"
+              className="w-full rounded-full bg-white/70 py-2.5 pl-11 pr-4 text-sm text-slate-700 ring-1 ring-indigo-100/80 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2860ff]/40"
+            />
+          </div>
+          <div
+            role="group"
+            aria-label="정렬"
+            className="flex shrink-0 self-start rounded-full bg-white/70 p-1 ring-1 ring-indigo-100/80 sm:self-auto"
+          >
+            {SORT_OPTIONS.map((option) => {
+              const selected = sort === option.value;
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  aria-pressed={selected}
+                  onClick={() => setSort(option.value)}
+                  className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all ${
+                    selected
+                      ? "bg-gradient-to-r from-[#2860ff] to-[#6b8fff] text-white shadow-[0_4px_20px_-4px_rgba(40,96,255,0.5)]"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal delay={140}>
+        <div className="mt-6 flex flex-wrap gap-2">
           {FILTERS.map((filter) => {
             const selected = active === filter.value;
             return (
@@ -92,16 +165,18 @@ export function MoodExplorer() {
         </div>
       </Reveal>
 
-      <Reveal delay={140}>
+      <Reveal delay={200}>
         <p className="mt-8 text-sm text-slate-500">
           {filtered.length}개의 플레이리스트
         </p>
       </Reveal>
 
       {filtered.length === 0 ? (
-        <Reveal delay={160}>
+        <Reveal delay={220}>
           <p className="mt-10 rounded-2xl bg-white/70 px-6 py-16 text-center text-slate-500 ring-1 ring-indigo-100/80">
-            이 무드의 플레이리스트가 아직 없어요. 다른 무드를 둘러보세요.
+            {query.trim()
+              ? "검색 결과가 없어요. 검색어를 바꿔보세요."
+              : "이 무드의 플레이리스트가 아직 없어요. 다른 무드를 둘러보세요."}
           </p>
         </Reveal>
       ) : (
@@ -112,6 +187,10 @@ export function MoodExplorer() {
               href={videoUrl(video.videoId)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(event) => {
+                event.preventDefault();
+                setActiveVideo(video);
+              }}
               className="group flex flex-col rounded-2xl bg-white/80 p-2.5 ring-1 ring-indigo-100/80 transition-all duration-300 hover:-translate-y-1.5 hover:bg-white hover:shadow-[0_18px_40px_-16px_rgba(40,96,255,0.3)] hover:ring-[#2860ff]/40"
             >
               <div className="relative aspect-video overflow-hidden rounded-xl">
@@ -120,6 +199,11 @@ export function MoodExplorer() {
                   title={video.title}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
+                {isNew(video) && (
+                  <span className="absolute left-2.5 top-2.5 rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-2.5 py-1 text-[11px] font-bold text-white shadow-[0_2px_12px_-2px_rgba(40,96,255,0.6)]">
+                    NEW
+                  </span>
+                )}
                 <span className="absolute right-2.5 top-2.5 flex items-center gap-1 rounded-full bg-black/55 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
                   <svg
                     width="11"
@@ -145,6 +229,11 @@ export function MoodExplorer() {
           ))}
         </div>
       )}
+
+      <VideoPreviewModal
+        video={activeVideo}
+        onClose={() => setActiveVideo(null)}
+      />
     </section>
   );
 }

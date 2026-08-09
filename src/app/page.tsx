@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { CHANNEL } from "@/lib/channel";
 import { PremiumHero } from "@/app/components/premium-hero";
+import { TodayPlaylist } from "@/app/components/today-playlist";
 import { FeaturedShowcase } from "@/app/components/featured-showcase";
 import { MoodExplorer } from "@/app/components/mood-explorer";
 import { StorySection } from "@/app/components/story-section";
@@ -59,7 +60,7 @@ export default function Home() {
               href={CHANNEL.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-4 py-2 font-medium text-white shadow-[0_4px_20px_-4px_rgba(40,96,255,0.5)] transition-all hover:-translate-y-0.5"
+              className="btn-shine rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-4 py-2 font-medium text-white shadow-[0_4px_20px_-4px_rgba(40,96,255,0.5)] transition-all hover:-translate-y-0.5"
             >
               구독
             </a>
@@ -69,6 +70,7 @@ export default function Home() {
 
       <main className="flex-1">
         <PremiumHero />
+        <TodayPlaylist />
         <FeaturedShowcase />
         <MoodExplorer />
         <StorySection />

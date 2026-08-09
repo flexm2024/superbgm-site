@@ -1,14 +1,22 @@
-// 추천 쇼케이스: 조회수 상위 3개 플레이리스트를 카드(이미지+텍스트 분리)로
+// 추천 쇼케이스: 조회수 상위 3개 플레이리스트를 카드(이미지+텍스트 분리)로, 클릭 시 미리듣기 모달
 "use client";
 
+import { useState } from "react";
 import { TOP_VIDEOS } from "@/lib/stats";
-import { videoUrl } from "@/lib/channel";
+import { videoUrl, type Video } from "@/lib/channel";
 import { Reveal } from "./reveal";
 import { VideoThumb } from "./video-thumb";
+import { VideoPreviewModal } from "./video-preview-modal";
 
 const RANK_LABELS = ["TOP 1", "TOP 2", "TOP 3"];
 
+function isNew(video: Video): boolean {
+  return video.published === "1개월 전";
+}
+
 export function FeaturedShowcase() {
+  const [activeVideo, setActiveVideo] = useState<Video | null>(null);
+
   return (
     <section
       id="featured"
@@ -34,6 +42,10 @@ export function FeaturedShowcase() {
               href={videoUrl(video.videoId)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(event) => {
+                event.preventDefault();
+                setActiveVideo(video);
+              }}
               className="group flex flex-col rounded-2xl bg-white/80 p-2.5 ring-1 ring-indigo-100/80 transition-all duration-300 hover:-translate-y-1.5 hover:bg-white hover:shadow-[0_18px_40px_-16px_rgba(40,96,255,0.3)] hover:ring-[#2860ff]/40"
             >
               <div className="relative aspect-video overflow-hidden rounded-xl">
@@ -42,9 +54,16 @@ export function FeaturedShowcase() {
                   title={video.title}
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
-                <span className="absolute left-2.5 top-2.5 rounded-full bg-white/85 px-3 py-1 text-[11px] font-bold tracking-widest text-[#2860ff] ring-1 ring-indigo-100 backdrop-blur-md">
-                  {RANK_LABELS[index]}
-                </span>
+                <div className="absolute left-2.5 top-2.5 flex items-center gap-1.5">
+                  <span className="rounded-full bg-white/85 px-3 py-1 text-[11px] font-bold tracking-widest text-[#2860ff] ring-1 ring-indigo-100 backdrop-blur-md">
+                    {RANK_LABELS[index]}
+                  </span>
+                  {isNew(video) && (
+                    <span className="rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-2.5 py-1 text-[11px] font-bold text-white shadow-[0_2px_12px_-2px_rgba(40,96,255,0.6)]">
+                      NEW
+                    </span>
+                  )}
+                </div>
                 <span className="absolute right-2.5 top-2.5 flex items-center gap-1 rounded-full bg-black/55 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
                   <svg
                     width="11"
@@ -70,6 +89,11 @@ export function FeaturedShowcase() {
           </Reveal>
         ))}
       </div>
+
+      <VideoPreviewModal
+        video={activeVideo}
+        onClose={() => setActiveVideo(null)}
+      />
     </section>
   );
 }

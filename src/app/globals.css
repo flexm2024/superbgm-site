@@ -75,6 +75,30 @@ body {
     animation: aurora-shimmer 6s ease-in-out infinite;
   }
 
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-140%) skewX(-24deg);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent
+    );
+    pointer-events: none;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .btn-shine:hover::after {
+    transform: translateX(140%) skewX(-24deg);
+  }
+
   .vinyl-disc {
     background:
       radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.1), transparent 38%),
@@ -152,6 +176,10 @@ body {
   .animate-aurora-text,
   .animate-float-particle {
     animation: none;
+  }
+
+  .btn-shine::after {
+    transition: none;
   }
 }
 
