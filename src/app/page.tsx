@@ -20,8 +20,17 @@ export default function Home() {
 
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050510]/70 backdrop-blur-md">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-          <a href="#" className="text-lg font-semibold text-white">
-            Super<span className="text-aurora">BGM</span>
+          <a href="#" className="flex items-center gap-2.5">
+            <Image
+              src="/로고.png"
+              alt="SuperBGM 로고"
+              width={32}
+              height={32}
+              className="h-8 w-8 rounded-full ring-1 ring-white/15"
+            />
+            <span className="text-lg font-semibold text-white">
+              Super<span className="text-aurora">BGM</span>
+            </span>
           </a>
           <nav className="flex items-center gap-5 text-sm text-zinc-300">
             <a
@@ -90,8 +99,8 @@ export default function Home() {
           </div>
 
           <Image
-            src={CHANNEL.avatar}
-            alt="SuperBGM 채널 아바타"
+            src="/로고.png"
+            alt="SuperBGM 로고"
             width={128}
             height={128}
             priority

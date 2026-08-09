@@ -1,7 +1,7 @@
 # SuperBGM 채널 홈페이지 — 작업 메모리
 
-> 상태: **랜딩 페이지 구현 + OG/favicon 교체 + Vercel 배포 + 커스텀 도메인 연결 + 히어로 업그레이드 완료** — 빌드/린트 검증 통과, GitHub 푸시 완료.
-> 진행 중: **로고 교체 (적용 전)** — 로고 파일은 확보·커밋됨, 히어로 아바타/헤더 반영은 미완
+> 상태: **랜딩 페이지 구현 + OG/favicon 교체 + Vercel 배포 + 커스텀 도메인 연결 + 히어로 업그레이드 + 로고 적용 완료** — 빌드/린트 검증 통과, GitHub 푸시 완료.
+> 진행 중: 없음 (로고 적용 완료, 시각 확인만 사용자 대기)
 > 사이트: https://superbgm.flexmstudio.com (커스텀 도메인, 2026-08-09) / https://superbgm-site.vercel.app (별칭 유지)
 > 최종 갱신: 2026-08-09
 
@@ -32,10 +32,11 @@
   - 검증: `npm run build` 성공(EXIT 0), lint 통과, lsp_diagnostics(page.tsx) 에러 0
   - 배포: `vercel --prod` → `actahd0hj` (Ready 24s), https://superbgm.flexmstudio.com HTTP 200 + `animate-float-note`/`animate-eq`/`SCROLL`/통계 문구 렌더링 확인
   - ⚠️ 이전 세션에서 "커밋 8a5a1a2/204f0d4" 기록은 실제 git 로그에 없음 — 재구성 오류였고 실제로는 미커밋이었음. 현재는 `57981bb`에 정상 커밋됨
-- [ ] **로고 교체 (진행 중, 2026-08-09)** — 사용자가 `public\로고.png` 저장함
-  - 파일 확인: PNG **1024x1024**, RGBA(colorType 6, 투명 배경 가능성 높음), 1.4MB — 커밋 `57981bb`에 포함됨
-  - 할 일: (1) 로고 시각 확인 — `look_at` 2회 시도 모두 사용자 메시지로 중단됨, 이미지 직접 확인 필요 (2) 히어로 아바타(`src/app/page.tsx` 92~99행, 현재 `src={CHANNEL.avatar}`)를 로컬 로고로 교체 (3) 헤더(21~49행, 현재 텍스트 "SuperBGM")에도 로고 반영 검토 (4) 빌드 → 배포 → 검증
-  - 주의: `src/lib/channel.ts` 수정 금지 원칙 — 로고는 컴포넌트에서 `/로고.png`(또는 영문화 파일명) 참조로 교체
+- [x] **로고 교체 (완료, 2026-08-09)** — 사용자가 `public\로고.png` 저장함
+  - 파일 확인: PNG **1024x1024**, RGBA(colorType 6, Format32bppArgb — 투명 채널 포함), 1.4MB — 커밋 `57981bb`에 포함됨
+  - 적용: 히어로 아바타(`page.tsx`, `src={CHANNEL.avatar}` → `src="/로고.png"`) + 헤더(로고 32px 원형 + 텍스트 "SuperBGM" 병행) — `src/lib/channel.ts`는 수정하지 않음
+  - 검증: 빌드/린트 통과, lsp 에러 0, 배포 완료(Ready 17s), https://superbgm.flexmstudio.com HTTP 200, 페이지 내 로고 PNG 참조 확인, 로고 이미지 자체 200(image/png, 1,497,476 bytes)
+  - ⚠️ 시각 확인: 이 모델은 이미지 입력 미지원(Read/look_at 불가) → 로고가 실제로 예쁘게 보이는지는 **사용자 직접 확인 필요**
 
 ## 3. 배포 준비 (2026-08-08 완료)
 
