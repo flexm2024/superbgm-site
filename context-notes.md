@@ -1,7 +1,7 @@
 # SuperBGM 채널 홈페이지 — 작업 메모리
 
-> 상태: **랜딩 페이지 구현 + OG/favicon 교체 + Vercel 배포 + 커스텀 도메인 연결 + 히어로 업그레이드 + 로고 적용 + 움직이는 히어로(오로라 텍스트) 적용 완료** — 빌드/린트 검증 통과, GitHub 푸시 완료.
-> 진행 중: 없음 (샘플 히어로 4종은 `/hero-samples`에 보관 — 메인은 ② 오로라 텍스트 선택)
+> 상태: **랜딩 + 로고 적용 + 움직이는 히어로(오로라 텍스트) 적용 완료, 프리미엄 리디자인 미리보기 `/premium` 구현 완료** — 빌드/린트/lsp 검증 통과, 로컬 렌더링 확인.
+> 진행 중: **프리미엄 리디자인 — 사용자 `/premium` 미리보기 확인 대기 (확정 시 `/`로 승격 + 커밋 + 배포)**
 > 사이트: https://superbgm.flexmstudio.com (커스텀 도메인, 2026-08-09) / https://superbgm-site.vercel.app (별칭 유지)
 > 최종 갱신: 2026-08-09
 
@@ -41,6 +41,14 @@
   - 샘플 4종 구현: `/hero-samples` 라우트 (vinyl LP 디스크 / gradient 오로라 텍스트 / parallax 마우스 3D / wave 웨이브 배너) — 공통 셸 `src/app/components/hero-sample-shell.tsx`, CSS 애니메이션 `globals.css`에 추가(`spin-slow`/`aurora-shimmer`/`float-particle`/`.vinyl-disc`), 샘플은 메인에 미적용 상태로 유지
   - 메인 적용: `page.tsx` — h1을 오로라 시머 2줄 텍스트(`text-aurora animate-aurora-text`)로 교체, 음표/이퀄라이저 장식 제거 → 빛 파티클 14개(`animate-float-particle`)로 대체. 통계 배지·SCROLL 인디케이터는 유지
   - 검증: 빌드 EXIT 0 · lint 통과 · lsp 에러 0 · 배포 완료(Ready 23s) · https://superbgm.flexmstudio.com HTTP 200 + `animate-aurora-text`/`animate-float-particle`/SCROLL/통계 문구 렌더링 확인, 음표 클래스 제거 확인
+- [x] **프리미엄 리디자인 미리보기 `/premium` (구현 완료, 2026-08-09)** — 사용자 "전체 프리미엄 개편" 선택 (미리보기 후 확정 방식)
+  - ⚠️ 위임 불가 확정: background task 스폰이 `ProviderModelNotFoundError: opencode/gpt-5-nano`로 전부 실패 (카테고리 모델 미설정) → **직접 구현**
+  - 구성: `src/app/premium/page.tsx` + `components/`(premium-hero/featured-showcase/mood-explorer/stats-band/story-section/premium-footer/reveal/video-thumb) + `lib/stats.ts`
+  - 디자인: 시네마틱 히어로(대형 타이포 + 오로라 조명 + 필름 그레인 + 파티클) / 조회수 상위 3 TOP 쇼케이스 / 무드 칩 11종 필터 갤러리(maxres 썸네일 + hq 폴백) / 스탯 밴드(플레이리스트 수·무드 수·누적 조회수 자동 계산) / 스토리 / 프리미엄 푸터(기존 홈 링크)
+  - `globals.css`: `premium-grain`/`premium-reveal` 유틸 추가 (additive, 기존 스타일 불변)
+  - 검증: 빌드 EXIT 0 (10 라우트 프리렌더) · lint 통과 · lsp 에러 0 · `next start -p 3210`에서 /premium HTTP 200 + 전 섹션 문구 렌더링 확인, `/` 회귀 없음
+  - ⚠️ 로컬 포트 3000은 다른 앱("Claude Code Chat")이 점유 — 로컬 확인 시 3210 등 다른 포트 사용
+  - ⚠️ **미커밋/미배포 상태 — 사용자 확정 대기**
 
 ## 3. 배포 준비 (2026-08-08 완료)
 
@@ -59,6 +67,7 @@
   - 조사 결과: 카테고리는 플러그인 `oh-my-openagent`에 내장 (`AppData\Roaming\npm\node_modules\oh-my-openagent\dist\index.js` — `CATEGORY_MODEL_REQUIREMENTS`의 `"visual-engineering"` 엔트리, gemini-3.1-pro 등 fallback 체인)
   - 삭제 방법: 플러그인 코드를 직접 수정하지 말 것(업데이트 시 소실). **config 기반 비활성화 지원**: 사용자 `opencode.jsonc`에 `categories: { "visual-engineering": { "disable": true } }` 추가 (플러그인 스키마 `OhMyOpenCodeConfigSchema.categories` 확인됨, `disable` 필터링 로직도 확인됨)
   - ⚠️ 원인 분석: 카테고리 자체 결함이 아니라 **동기 task가 실행 중 사용자 메시지에 의해 abort되는 환경 동작**이 5회 실패의 원인일 가능성 높음 — 비활성화해도 다른 카테고리(ultrabrain 등)에서 동일 현상 재발 가능. 삭제 대신 **UI 작업은 background(task, run_in_background=true)로 위임**하는 쪽 권장
+  - 🔍 2026-08-09 원인 추가 확정: background 스폰 실패 에러에서 `ProviderModelNotFoundError: opencode/gpt-5-nano` 확인 — **카테고리 실행 모델이 이 환경에 미설정되어 위임 자체가 불가**. background/동기 무관. → **UI 작업은 직접 구현이 확립 패턴** (이 항목은 실질적으로 종결)
   - 미적용 상태 (2026-08-09 시점) — 사용자 재확인 필요
 - [ ] OG 이미지 / favicon 교체 (2026-08-08 완료)
   - favicon.ico(`src/app/`), favicon 16/32/96, apple-touch-icon, android-chrome 192/512 (`public/`)
