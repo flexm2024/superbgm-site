@@ -25,13 +25,13 @@ export default function Home() {
 
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050510]/70 backdrop-blur-md">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-          <a href="#" className="flex items-center gap-2.5">
+          <a href="#" className="flex items-center gap-3">
             <Image
               src="/로고.png"
               alt="SuperBGM 로고"
-              width={32}
-              height={32}
-              className="h-8 w-8 rounded-full ring-1 ring-white/15"
+              width={40}
+              height={40}
+              className="h-10 w-10 rounded-full ring-2 ring-white/25 shadow-[0_0_20px_rgba(129,140,248,0.45)]"
             />
             <span className="text-lg font-semibold text-white">
               Super<span className="text-aurora">BGM</span>
