@@ -15,13 +15,13 @@ export function FeaturedShowcase() {
       className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 py-16 sm:px-6 sm:py-24"
     >
       <Reveal>
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-indigo-300">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2860ff]">
           Featured
         </p>
-        <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
           가장 사랑받는 플레이리스트
         </h2>
-        <p className="mt-3 max-w-xl text-sm text-zinc-400 sm:text-base">
+        <p className="mt-3 max-w-xl text-sm text-slate-500 sm:text-base">
           SuperBGM에서 가장 많은 사랑을 받은 세 개의 플레이리스트를
           앨범처럼 만나보세요.
         </p>
@@ -34,7 +34,7 @@ export function FeaturedShowcase() {
               href={videoUrl(video.videoId)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative block overflow-hidden rounded-2xl ring-1 ring-white/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_70px_-18px_rgba(129,140,248,0.5)] hover:ring-white/25"
+              className="group relative block overflow-hidden rounded-2xl ring-1 ring-slate-200/80 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_-20px_rgba(40,96,255,0.35)] hover:ring-[#2860ff]/40"
             >
               <div className="relative aspect-video">
                 <VideoThumb
@@ -47,7 +47,7 @@ export function FeaturedShowcase() {
                 aria-hidden
                 className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"
               />
-              <span className="glass absolute left-4 top-4 rounded-full px-3 py-1 text-[11px] font-bold tracking-widest text-indigo-200">
+              <span className="absolute left-4 top-4 rounded-full bg-white/85 px-3 py-1 text-[11px] font-bold tracking-widest text-[#2860ff] ring-1 ring-indigo-100 backdrop-blur-md">
                 {RANK_LABELS[index]}
               </span>
               <span

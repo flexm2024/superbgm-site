@@ -50,13 +50,13 @@ export function MoodExplorer() {
       className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 py-16 sm:px-6 sm:py-24"
     >
       <Reveal>
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-indigo-300">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2860ff]">
           Mood Explorer
         </p>
-        <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
           무드로 찾는 플레이리스트
         </h2>
-        <p className="mt-3 max-w-xl text-sm text-zinc-400 sm:text-base">
+        <p className="mt-3 max-w-xl text-sm text-slate-500 sm:text-base">
           지금의 기분과 어울리는 플레이리스트를 골라보세요. 무드를 선택하면
           그 분위기의 음악만 모아 보여드립니다.
         </p>
@@ -74,14 +74,14 @@ export function MoodExplorer() {
                 onClick={() => setActive(filter.value)}
                 className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   selected
-                    ? "bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white shadow-[0_4px_24px_-6px_rgba(129,140,248,0.7)]"
-                    : "glass text-zinc-300 hover:border-white/25 hover:text-white"
+                    ? "bg-gradient-to-r from-[#2860ff] to-[#6b8fff] text-white shadow-[0_4px_20px_-4px_rgba(40,96,255,0.5)]"
+                    : "bg-white/70 text-slate-600 ring-1 ring-indigo-100/80 hover:ring-[#2860ff]/40 hover:text-slate-900"
                 }`}
               >
                 {filter.label}
                 <span
                   className={`ml-1.5 text-xs ${
-                    selected ? "text-white/80" : "text-zinc-500"
+                    selected ? "text-white/80" : "text-slate-400"
                   }`}
                 >
                   {filter.count}
@@ -93,14 +93,14 @@ export function MoodExplorer() {
       </Reveal>
 
       <Reveal delay={140}>
-        <p className="mt-8 text-sm text-zinc-500">
+        <p className="mt-8 text-sm text-slate-500">
           {filtered.length}개의 플레이리스트
         </p>
       </Reveal>
 
       {filtered.length === 0 ? (
         <Reveal delay={160}>
-          <p className="mt-10 rounded-2xl glass px-6 py-16 text-center text-zinc-400">
+          <p className="mt-10 rounded-2xl bg-white/70 px-6 py-16 text-center text-slate-500 ring-1 ring-indigo-100/80">
             이 무드의 플레이리스트가 아직 없어요. 다른 무드를 둘러보세요.
           </p>
         </Reveal>
@@ -112,7 +112,7 @@ export function MoodExplorer() {
               href={videoUrl(video.videoId)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group glass flex flex-col rounded-2xl p-2.5 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:bg-white/[0.07] hover:shadow-[0_18px_50px_-18px_rgba(129,140,248,0.4)]"
+              className="group flex flex-col rounded-2xl bg-white/80 p-2.5 ring-1 ring-indigo-100/80 transition-all duration-300 hover:-translate-y-1.5 hover:bg-white hover:shadow-[0_18px_40px_-16px_rgba(40,96,255,0.3)] hover:ring-[#2860ff]/40"
             >
               <div className="relative aspect-video overflow-hidden rounded-xl">
                 <VideoThumb
@@ -134,10 +134,10 @@ export function MoodExplorer() {
                 </span>
               </div>
               <div className="flex flex-col gap-1 px-1.5 py-3">
-                <h3 className="line-clamp-2 text-sm font-medium leading-snug text-zinc-100 group-hover:text-white">
+                <h3 className="line-clamp-2 text-sm font-medium leading-snug text-slate-800 group-hover:text-slate-900">
                   {video.title}
                 </h3>
-                <p className="mt-auto pt-1 text-xs text-zinc-500">
+                <p className="mt-auto pt-1 text-xs text-slate-400">
                   {video.views} · {video.published}
                 </p>
               </div>

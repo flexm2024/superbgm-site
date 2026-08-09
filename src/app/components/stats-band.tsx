@@ -13,7 +13,7 @@ export function StatsBand() {
   return (
     <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
       <Reveal>
-        <div className="glass rounded-3xl px-6 py-12 sm:px-12 sm:py-14">
+        <div className="rounded-3xl bg-white/70 px-6 py-12 ring-1 ring-indigo-100/80 shadow-[0_16px_50px_-24px_rgba(40,96,255,0.25)] sm:px-12 sm:py-14">
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-6">
             {STATS.map((stat) => (
               <div
@@ -23,7 +23,7 @@ export function StatsBand() {
                 <span className="text-aurora text-4xl font-bold tracking-tight sm:text-5xl">
                   {stat.value}
                 </span>
-                <span className="text-sm tracking-wide text-zinc-400">
+                <span className="text-sm tracking-wide text-slate-500">
                   {stat.label}
                 </span>
               </div>

@@ -11,10 +11,10 @@ const PARTICLES = Array.from({ length: 18 }, (_, index) => ({
   delay: `${(index % 5) * 0.9}s`,
   color:
     index % 3 === 0
-      ? "bg-indigo-300/60"
+      ? "bg-[#6b8fff]/70"
       : index % 3 === 1
-        ? "bg-fuchsia-300/50"
-        : "bg-sky-300/50",
+        ? "bg-violet-400/60"
+        : "bg-sky-400/60",
 }));
 
 const HERO_STATS = [
@@ -52,30 +52,30 @@ export function PremiumHero() {
           width={144}
           height={144}
           priority
-          className="h-28 w-28 rounded-full shadow-[0_0_80px_rgba(129,140,248,0.45)] ring-2 ring-white/20 ring-offset-8 ring-offset-[#050510] sm:h-36 sm:w-36"
+          className="h-28 w-28 rounded-full bg-white/40 shadow-[0_0_80px_rgba(40,96,255,0.35)] ring-2 ring-white/70 ring-offset-8 ring-offset-[#f6f8ff] sm:h-36 sm:w-36"
         />
       </Reveal>
 
       <Reveal delay={80}>
-        <p className="mt-9 text-sm font-semibold uppercase tracking-[0.35em] text-indigo-300">
+        <p className="mt-9 text-sm font-semibold uppercase tracking-[0.35em] text-[#2860ff]">
           {CHANNEL.handle}
         </p>
       </Reveal>
 
       <Reveal delay={160}>
         <h1 className="mt-5 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl">
-          <span className="text-white drop-shadow-[0_0_28px_rgba(255,255,255,0.25)]">
+          <span className="text-slate-900">
             감성을 깨우는
           </span>
           <br />
-          <span className="text-aurora animate-aurora-text drop-shadow-[0_0_36px_rgba(192,132,252,0.45)]">
+          <span className="text-aurora animate-aurora-text drop-shadow-[0_6px_24px_rgba(139,92,246,0.3)]">
             몽환적인 사운드 공간
           </span>
         </h1>
       </Reveal>
 
       <Reveal delay={240}>
-        <p className="mt-7 max-w-2xl whitespace-pre-line text-base leading-8 text-zinc-400 sm:text-lg sm:leading-9">
+        <p className="mt-7 max-w-2xl whitespace-pre-line text-base leading-8 text-slate-500 sm:text-lg sm:leading-9">
           {CHANNEL.description}
         </p>
       </Reveal>
@@ -86,7 +86,7 @@ export function PremiumHero() {
             href={CHANNEL.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-8 py-3.5 text-center font-semibold text-white shadow-[0_8px_40px_-8px_rgba(129,140,248,0.7)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_50px_-8px_rgba(192,132,252,0.8)] sm:w-auto"
+            className="w-full rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-8 py-3.5 text-center font-semibold text-white shadow-[0_8px_32px_-8px_rgba(40,96,255,0.6)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_44px_-8px_rgba(40,96,255,0.7)] sm:w-auto"
           >
             유튜브 구독하기
           </a>
@@ -98,10 +98,10 @@ export function PremiumHero() {
           {HERO_STATS.map((stat) => (
             <div key={stat.label} className="glass min-w-[130px] rounded-2xl px-6 py-4">
               <dt className="sr-only">{stat.label}</dt>
-              <dd className="text-2xl font-bold text-white sm:text-3xl">
+              <dd className="text-2xl font-bold text-slate-900 sm:text-3xl">
                 {stat.value}
               </dd>
-              <p className="mt-1 text-xs tracking-wide text-zinc-400">
+              <p className="mt-1 text-xs tracking-wide text-slate-500">
                 {stat.label}
               </p>
             </div>
@@ -112,7 +112,7 @@ export function PremiumHero() {
       <a
         href="#featured"
         aria-label="추천 플레이리스트 보기"
-        className="mt-16 inline-flex flex-col items-center gap-1.5 text-zinc-500 transition-colors hover:text-zinc-300"
+        className="mt-16 inline-flex flex-col items-center gap-1.5 text-slate-400 transition-colors hover:text-slate-600"
       >
         <span className="text-[11px] font-medium tracking-[0.25em]">SCROLL</span>
         <svg
