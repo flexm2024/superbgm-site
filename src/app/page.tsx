@@ -1,10 +1,9 @@
-// 메인 랜딩 페이지: 프리미엄 리디자인 (시네마틱 히어로 + TOP 쇼케이스 + 무드 필터 갤러리 + 스탯 밴드)
+// 메인 랜딩 페이지: 프리미엄 리디자인 (시네마틱 히어로 + TOP 쇼케이스 + 무드 필터 갤러리 + 스토리)
 import Image from "next/image";
 import { CHANNEL } from "@/lib/channel";
 import { PremiumHero } from "@/app/components/premium-hero";
 import { FeaturedShowcase } from "@/app/components/featured-showcase";
 import { MoodExplorer } from "@/app/components/mood-explorer";
-import { StatsBand } from "@/app/components/stats-band";
 import { StorySection } from "@/app/components/story-section";
 import { PremiumFooter } from "@/app/components/premium-footer";
 
@@ -72,7 +71,6 @@ export default function Home() {
         <PremiumHero />
         <FeaturedShowcase />
         <MoodExplorer />
-        <StatsBand />
         <StorySection />
       </main>
 

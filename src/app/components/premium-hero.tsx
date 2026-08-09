@@ -1,7 +1,6 @@
-// 프리미엄 히어로: 시네마틱 오로라 조명 + 파티클 + 대형 타이포
+// 프리미엄 히어로: 시네마틱 오로라 조명 + 파티클 + 대형 타이포 + 오디오 웨이브
 import Image from "next/image";
-import { CHANNEL, VIDEOS } from "@/lib/channel";
-import { TOTAL_MOODS, TOTAL_VIEWS, formatCompact } from "@/lib/stats";
+import { CHANNEL } from "@/lib/channel";
 import { Reveal } from "./reveal";
 
 const PARTICLES = Array.from({ length: 18 }, (_, index) => ({
@@ -17,11 +16,10 @@ const PARTICLES = Array.from({ length: 18 }, (_, index) => ({
         : "bg-sky-400/60",
 }));
 
-const HERO_STATS = [
-  { label: "플레이리스트", value: `${VIDEOS.length}+` },
-  { label: "감성 무드", value: `${TOTAL_MOODS}` },
-  { label: "누적 조회수", value: formatCompact(TOTAL_VIEWS) },
-];
+const BARS = Array.from({ length: 56 }, (_, index) => ({
+  height: 10 + Math.abs(Math.sin(index * 0.45)) * 44,
+  delay: `${(index % 9) * 0.13}s`,
+}));
 
 export function PremiumHero() {
   return (
@@ -43,6 +41,24 @@ export function PremiumHero() {
             }}
           />
         ))}
+        <span className="animate-float-note absolute left-[10%] top-[18%] hidden select-none text-3xl text-[#2860ff]/40 md:block">
+          ♪
+        </span>
+        <span className="animate-float-note-slow absolute right-[12%] top-[45%] hidden select-none text-3xl text-[#ec4899]/40 md:block">
+          ♫
+        </span>
+        <div className="absolute inset-x-0 bottom-0 flex h-24 items-center justify-center gap-[3px] overflow-hidden opacity-60">
+          {BARS.map((bar, index) => (
+            <span
+              key={index}
+              className="animate-eq w-1 rounded-full bg-gradient-to-t from-[#2860ff]/50 via-[#8b5cf6]/50 to-[#ec4899]/50"
+              style={{
+                height: `${bar.height}px`,
+                animationDelay: bar.delay,
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       <Reveal>
@@ -91,22 +107,6 @@ export function PremiumHero() {
             유튜브 구독하기
           </a>
         </div>
-      </Reveal>
-
-      <Reveal delay={400}>
-        <dl className="mt-14 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-          {HERO_STATS.map((stat) => (
-            <div key={stat.label} className="glass min-w-[130px] rounded-2xl px-6 py-4">
-              <dt className="sr-only">{stat.label}</dt>
-              <dd className="text-2xl font-bold text-slate-900 sm:text-3xl">
-                {stat.value}
-              </dd>
-              <p className="mt-1 text-xs tracking-wide text-slate-500">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </dl>
       </Reveal>
 
       <a
