@@ -1,5 +1,13 @@
-/* SuperBGM 글로벌 스타일: 라이트 몽환 테마, aurora 그라디언트, 글래스모피즘 유틸리티 */
+/* SuperBGM 글로벌 스타일: 라이트 몽환 테마, Pretendard 폰트, aurora 그라디언트, 글래스모피즘 유틸리티 */
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Pretendard Variable";
+  src: url("/fonts/PretendardVariable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 45 920;
+  font-display: swap;
+}
 
 :root {
   --background: #f6f8ff;
@@ -9,15 +17,16 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Pretendard Variable", "Apple SD Gothic Neo", "Malgun Gothic",
+    "Noto Sans KR", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), "Apple SD Gothic Neo", "Malgun Gothic",
-    "Noto Sans KR", Arial, sans-serif;
+  font-family: var(--font-sans);
 }
 
 @layer utilities {
