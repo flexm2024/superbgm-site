@@ -1,7 +1,7 @@
 # SuperBGM 채널 홈페이지 — 작업 메모리
 
-> 상태: **프리미엄 리디자인 메인 승격 + 라이트 컨셉 전환 완료** (`/` 적용, `/premium` → `/` 리다이렉트) — 실주소에서 확인 가능.
-> 진행 중: (없음 — MP3 링크 주소 확인 · `/hero-samples` 정리 여부는 사용자 확인 대기)
+> 상태: **5개 신규 기능(미리듣기 모달 · 오늘의 플레이리스트 · 검색/정렬 · NEW 배지 · CTA 광택) 배포 완료** — 커밋 `863dbad`, https://superbgm.flexmstudio.com 확인 가능
+> 진행 중: (없음 — `/hero-samples` 정리 여부는 사용자 확인 대기)
 > 사이트: https://superbgm.flexmstudio.com (커스텀 도메인, 2026-08-09) / https://superbgm-site.vercel.app (별칭 유지)
 > 최종 갱신: 2026-08-09
 
@@ -64,7 +64,17 @@
   - 자체 호스팅: `public/fonts/PretendardVariable.woff2` (2.06MB, v1.3.9 단일 변수 폰트, weight 45–920, WOFF2 매직 확인) — 완전 정적 사이트 제약 유지(외부 CDN 의존 없음)
   - `globals.css`: `@font-face "Pretendard Variable"` + `@theme --font-sans`/`--font-mono` 교체, body `font-family: var(--font-sans)`
   - `layout.tsx`: Geist/Geist_Mono(next/font/google) 제거, html className에서 변수 정리 — 불필요한 폰트 다운로드 제거
-  - 검증: 빌드 EXIT 0 · lint 통과 · 로컬/프로덕션 폰트 파일 200(font/woff2) · CSS 번들에 Pretendard @font-face 포함 + Geist 잔재 없음
+   - 검증: 빌드 EXIT 0 · lint 통과 · 로컬/프로덕션 폰트 파일 200(font/woff2) · CSS 번들에 Pretendard @font-face 포함 + Geist 잔재 없음
+- [x] **신규 기능 5종 (2026-08-09 구현 → 커밋 `863dbad` → push → 배포 완료)** — 사용자가 제안 6종 중 5종 선택(검색+정렬 / 오늘의 플레이리스트 / 유튜브 미리듣기 모달 / NEW 배지 / CTA 마이크로인터랙션)
+  - ⚠️ 위임 불가 재확인: background task 스폰이 `ProviderModelNotFoundError: opencode/gpt-5-nano`로 실패 (카테고리 모델 미설정) → **직접 구현 확립 패턴 재확인** (이전 `/premium` 때와 동일 원인)
+  - `src/app/components/video-preview-modal.tsx` (신규): `{video, onClose}` 완전 제어형 모달 — `youtube-nocookie.com/embed/{id}?autoplay=1&rel=0` iframe, ESC·백드롭 클릭 닫기, `body.style.overflow=hidden` 스크롤락(언마운트 시 복원), 닫기 버튼, "YouTube에서 열기" 링크
+  - `src/app/components/today-playlist.tsx` (신규): "오늘의 플레이리스트" 섹션 — `dayOfYear() % VIDEOS.length`로 날짜 기반 결정적 선택(하루 유지), "다른 추천" 랜덤 버튼(자기자신 제외), 썸네일+플레이 버튼/미리듣기/유튜브에서 보기, `page.tsx`에서 PremiumHero 아래 `#today`로 통합
+  - `mood-explorer.tsx`: 제목 검색 input(대소문자 무시) + 정렬 세그먼트(최신순/조회수순 `parseViews` desc) — 무드 칩 필터와 복합 동작, 빈 상태 문구 분기(검색/무드)
+  - `featured-showcase.tsx` + `mood-explorer.tsx`: 카드 `<a>` onClick `preventDefault` → 모달 오픈(우클릭/새탭은 href 유지), NEW 배지(`published === '1개월 전'` → 3개) — 추천 카드는 TOP 배지 옆에 배치
+  - `globals.css`: `.btn-shine` 유틸(::after skew 광택 스윕, hover 트리거) + `prefers-reduced-motion`에서 `transition: none` — CTA 4곳 적용(헤더 구독 / 히어로 구독하기 / 스토리 채널 보러가기 / 오늘의 미리듣기)
+  - 검증: lint 통과 · build EXIT 0 · 로컬 스모크 200 (오늘의 플레이리스트·미리듣기·btn-shine·검색·정렬 렌더링) · **프로덕션 Playwright 인터랙션 전부 통과**: 모달 오픈(`embed/UPM_sGfZsuU?autoplay=1`)→ESC/백드롭 닫기+스크롤락 복원, 검색 "여름"→3건(제목 전부 매칭), 조회수순→1.1천회(겨울 발라드) 1위+aria-pressed, NEW 3개, "다른 추천" 변경+미리듣기 모달(embed/88IS8I8VGvI)
+  - ⚠️ 로컬 검증 시 이전 세션 고아 dev 서버(포트 3000 점유, 12:04 시작)가 스테일 코드를 서빙해 헷갈림 → `Stop-Process`로 종료 후 재검증 완료. 이후 확인 시 포트 점유 프로세스부터 체크할 것
+  - `.gitignore`에 `.playwright-mcp/` 추가 (Playwright MCP 스크린샷/스냅샷 아티팩트)
 
 ## 3. 배포 준비 (2026-08-08 완료)
 
