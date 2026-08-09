@@ -58,8 +58,8 @@ export function FeaturedShowcase() {
                   재생
                 </span>
               </div>
-              <div className="flex flex-col gap-1 px-1.5 py-3">
-                <h3 className="line-clamp-2 text-sm font-medium leading-snug text-slate-800 group-hover:text-slate-900">
+              <div className="flex flex-1 flex-col gap-1 px-1.5 py-3">
+                <h3 className="line-clamp-2 min-h-[2.75em] text-sm font-medium leading-snug text-slate-800 group-hover:text-slate-900">
                   {video.title}
                 </h3>
                 <p className="mt-auto pt-1 text-xs text-slate-400">
