@@ -1,4 +1,4 @@
-// 추천 쇼케이스: 조회수 상위 3개 플레이리스트를 앨범아트 카드로
+// 추천 쇼케이스: 조회수 상위 3개 플레이리스트를 카드(이미지+텍스트 분리)로
 "use client";
 
 import { TOP_VIDEOS } from "@/lib/stats";
@@ -34,43 +34,35 @@ export function FeaturedShowcase() {
               href={videoUrl(video.videoId)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative block overflow-hidden rounded-2xl ring-1 ring-slate-200/80 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_-20px_rgba(40,96,255,0.35)] hover:ring-[#2860ff]/40"
+              className="group flex flex-col rounded-2xl bg-white/80 p-2.5 ring-1 ring-indigo-100/80 transition-all duration-300 hover:-translate-y-1.5 hover:bg-white hover:shadow-[0_18px_40px_-16px_rgba(40,96,255,0.3)] hover:ring-[#2860ff]/40"
             >
-              <div className="relative aspect-video">
+              <div className="relative aspect-video overflow-hidden rounded-xl">
                 <VideoThumb
                   videoId={video.videoId}
                   title={video.title}
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
-              </div>
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"
-              />
-              <span className="absolute left-4 top-4 rounded-full bg-white/85 px-3 py-1 text-[11px] font-bold tracking-widest text-[#2860ff] ring-1 ring-indigo-100 backdrop-blur-md">
-                {RANK_LABELS[index]}
-              </span>
-              <span
-                aria-hidden
-                className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100"
-              >
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/15 backdrop-blur-md ring-1 ring-white/30 transition-transform duration-300 group-hover:scale-110">
+                <span className="absolute left-2.5 top-2.5 rounded-full bg-white/85 px-3 py-1 text-[11px] font-bold tracking-widest text-[#2860ff] ring-1 ring-indigo-100 backdrop-blur-md">
+                  {RANK_LABELS[index]}
+                </span>
+                <span className="absolute right-2.5 top-2.5 flex items-center gap-1 rounded-full bg-black/55 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
                   <svg
-                    width="22"
-                    height="22"
+                    width="11"
+                    height="11"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="ml-0.5 text-white"
+                    aria-hidden
                   >
                     <path d="M8 5.14v13.72L19 12 8 5.14z" />
                   </svg>
+                  재생
                 </span>
-              </span>
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                <h3 className="line-clamp-2 text-base font-semibold leading-snug text-white drop-shadow-md">
+              </div>
+              <div className="flex flex-col gap-1 px-1.5 py-3">
+                <h3 className="line-clamp-2 text-sm font-medium leading-snug text-slate-800 group-hover:text-slate-900">
                   {video.title}
                 </h3>
-                <p className="mt-2 text-xs font-medium text-zinc-300">
+                <p className="mt-auto pt-1 text-xs text-slate-400">
                   {video.views} · {video.published}
                 </p>
               </div>
