@@ -35,14 +35,6 @@ export function StorySection() {
             >
               채널 보러가기
             </a>
-            <a
-              href={CHANNEL.mp3Site}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-white/80 px-6 py-2.5 font-semibold text-slate-700 ring-1 ring-indigo-100 transition-all hover:-translate-y-0.5 hover:ring-[#2860ff]/50 hover:text-slate-900"
-            >
-              MP3 다운로드
-            </a>
           </div>
         </div>
       </Reveal>

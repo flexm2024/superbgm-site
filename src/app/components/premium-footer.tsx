@@ -35,14 +35,6 @@ export function PremiumFooter() {
           >
             YouTube 채널
           </a>
-          <a
-            href={CHANNEL.mp3Site}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-slate-500 transition-colors hover:text-[#2860ff]"
-          >
-            MP3 다운로드
-          </a>
         </div>
       </div>
       <div className="mx-auto mt-10 flex w-full max-w-6xl justify-center border-t border-slate-100 px-4 pt-6 sm:px-6">
