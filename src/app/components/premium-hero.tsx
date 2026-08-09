@@ -90,14 +90,6 @@ export function PremiumHero() {
           >
             유튜브 구독하기
           </a>
-          <a
-            href={CHANNEL.mp3Site}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="glass w-full rounded-full px-8 py-3.5 text-center font-semibold text-zinc-100 transition-all hover:-translate-y-0.5 hover:border-white/25 hover:text-white sm:w-auto"
-          >
-            MP3 다운로드
-          </a>
         </div>
       </Reveal>
 
