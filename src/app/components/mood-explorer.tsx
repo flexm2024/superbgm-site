@@ -71,13 +71,13 @@ export function MoodExplorer() {
       className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 py-16 sm:px-6 sm:py-24"
     >
       <Reveal>
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2860ff]">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--neon-blue)]">
           Mood Explorer
         </p>
-        <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--text-primary)] sm:text-4xl">
           무드로 찾는 플레이리스트
         </h2>
-        <p className="mt-3 max-w-xl text-sm text-slate-500 sm:text-base">
+        <p className="mt-3 max-w-xl text-sm text-[var(--text-muted)] sm:text-base">
           지금의 기분과 어울리는 플레이리스트를 골라보세요. 무드를 선택하면
           그 분위기의 음악만 모아 보여드립니다.
         </p>
@@ -87,7 +87,7 @@ export function MoodExplorer() {
         <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
           <div className="relative flex-1">
             <svg
-              className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+              className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-muted)]"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -105,13 +105,13 @@ export function MoodExplorer() {
               onChange={(event) => setQuery(event.target.value)}
               placeholder="플레이리스트 제목 검색"
               aria-label="플레이리스트 제목 검색"
-              className="w-full rounded-full bg-white/70 py-2.5 pl-11 pr-4 text-sm text-slate-700 ring-1 ring-indigo-100/80 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2860ff]/40"
+              className="w-full rounded-full bg-[var(--glass-bg)] py-2.5 pl-11 pr-4 text-sm text-[var(--text-primary)] ring-1 ring-[var(--glass-border)] transition-all placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--neon-blue)]/40"
             />
           </div>
           <div
             role="group"
             aria-label="정렬"
-            className="flex shrink-0 self-start rounded-full bg-white/70 p-1 ring-1 ring-indigo-100/80 sm:self-auto"
+            className="flex shrink-0 self-start rounded-full bg-[var(--glass-bg)] p-1 ring-1 ring-[var(--glass-border)] sm:self-auto"
           >
             {SORT_OPTIONS.map((option) => {
               const selected = sort === option.value;
@@ -123,8 +123,8 @@ export function MoodExplorer() {
                   onClick={() => setSort(option.value)}
                   className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all ${
                     selected
-                      ? "bg-gradient-to-r from-[#2860ff] to-[#6b8fff] text-white shadow-[0_4px_20px_-4px_rgba(40,96,255,0.5)]"
-                      : "text-slate-600 hover:text-slate-900"
+                      ? "bg-gradient-to-r from-[var(--neon-blue)] to-[var(--neon-blue-soft)] text-white shadow-[0_4px_20px_-4px_var(--glow-blue)]"
+                      : "text-[var(--text-muted)] hover:text-[var(--text-primary)]"
                   }`}
                 >
                   {option.label}
@@ -147,14 +147,14 @@ export function MoodExplorer() {
                 onClick={() => setActive(filter.value)}
                 className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   selected
-                    ? "bg-gradient-to-r from-[#2860ff] to-[#6b8fff] text-white shadow-[0_4px_20px_-4px_rgba(40,96,255,0.5)]"
-                    : "bg-white/70 text-slate-600 ring-1 ring-indigo-100/80 hover:ring-[#2860ff]/40 hover:text-slate-900"
+                    ? "bg-gradient-to-r from-[var(--neon-blue)] to-[var(--neon-blue-soft)] text-white shadow-[0_4px_20px_-4px_var(--glow-blue)]"
+                    : "bg-[var(--glass-bg)] text-[var(--text-muted)] ring-1 ring-[var(--glass-border)] hover:ring-[var(--neon-blue)]/40 hover:text-[var(--text-primary)]"
                 }`}
               >
                 {filter.label}
                 <span
                   className={`ml-1.5 text-xs ${
-                    selected ? "text-white/80" : "text-slate-400"
+                    selected ? "text-white/80" : "text-[var(--text-muted)]"
                   }`}
                 >
                   {filter.count}
@@ -166,14 +166,14 @@ export function MoodExplorer() {
       </Reveal>
 
       <Reveal delay={200}>
-        <p className="mt-8 text-sm text-slate-500">
+        <p className="mt-8 text-sm text-[var(--text-muted)]">
           {filtered.length}개의 플레이리스트
         </p>
       </Reveal>
 
       {filtered.length === 0 ? (
         <Reveal delay={220}>
-          <p className="mt-10 rounded-2xl bg-white/70 px-6 py-16 text-center text-slate-500 ring-1 ring-indigo-100/80">
+          <p className="mt-10 rounded-2xl bg-[var(--glass-bg)] px-6 py-16 text-center text-[var(--text-muted)] ring-1 ring-[var(--glass-border)]">
             {query.trim()
               ? "검색 결과가 없어요. 검색어를 바꿔보세요."
               : "이 무드의 플레이리스트가 아직 없어요. 다른 무드를 둘러보세요."}
@@ -191,7 +191,7 @@ export function MoodExplorer() {
                 event.preventDefault();
                 setActiveVideo(video);
               }}
-              className="group flex flex-col rounded-2xl bg-white/80 p-2.5 ring-1 ring-indigo-100/80 transition-all duration-300 hover:-translate-y-1.5 hover:bg-white hover:shadow-[0_18px_40px_-16px_rgba(40,96,255,0.3)] hover:ring-[#2860ff]/40"
+              className="card-hover group flex flex-col rounded-2xl glass p-2.5"
             >
               <div className="relative aspect-video overflow-hidden rounded-xl">
                 <VideoThumb
@@ -200,7 +200,7 @@ export function MoodExplorer() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
                 {isNew(video) && (
-                  <span className="absolute left-2.5 top-2.5 rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-2.5 py-1 text-[11px] font-bold text-white shadow-[0_2px_12px_-2px_rgba(40,96,255,0.6)]">
+                  <span className="absolute left-2.5 top-2.5 rounded-full bg-gradient-to-r from-[var(--neon-blue)] to-[var(--neon-blue-soft)] px-2.5 py-1 text-[11px] font-bold text-white shadow-[0_2px_12px_-2px_var(--glow-blue)]">
                     NEW
                   </span>
                 )}
@@ -218,10 +218,10 @@ export function MoodExplorer() {
                 </span>
               </div>
               <div className="flex flex-col gap-1 px-1.5 py-3">
-                <h3 className="line-clamp-2 text-sm font-medium leading-snug text-slate-800 group-hover:text-slate-900">
+                <h3 className="line-clamp-2 text-sm font-medium leading-snug text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]">
                   {video.title}
                 </h3>
-                <p className="mt-auto pt-1 text-xs text-slate-400">
+                <p className="mt-auto pt-1 text-xs text-[var(--text-muted)]">
                   {video.views} · {video.published}
                 </p>
               </div>

@@ -23,13 +23,13 @@ export function FeaturedShowcase() {
       className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 py-16 sm:px-6 sm:py-24"
     >
       <Reveal>
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2860ff]">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--neon-blue)]">
           Featured
         </p>
-        <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--text-primary)] sm:text-4xl">
           가장 사랑받는 플레이리스트
         </h2>
-        <p className="mt-3 max-w-xl text-sm text-slate-500 sm:text-base">
+        <p className="mt-3 max-w-xl text-sm text-[var(--text-muted)] sm:text-base">
           SuperBGM에서 가장 많은 사랑을 받은 세 개의 플레이리스트를
           앨범처럼 만나보세요.
         </p>
@@ -46,7 +46,7 @@ export function FeaturedShowcase() {
                 event.preventDefault();
                 setActiveVideo(video);
               }}
-              className="group flex flex-col rounded-2xl bg-white/80 p-2.5 ring-1 ring-indigo-100/80 transition-all duration-300 hover:-translate-y-1.5 hover:bg-white hover:shadow-[0_18px_40px_-16px_rgba(40,96,255,0.3)] hover:ring-[#2860ff]/40"
+              className="card-hover group flex flex-col rounded-2xl glass p-2.5"
             >
               <div className="relative aspect-video overflow-hidden rounded-xl">
                 <VideoThumb
@@ -55,11 +55,11 @@ export function FeaturedShowcase() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
                 <div className="absolute left-2.5 top-2.5 flex items-center gap-1.5">
-                  <span className="rounded-full bg-white/85 px-3 py-1 text-[11px] font-bold tracking-widest text-[#2860ff] ring-1 ring-indigo-100 backdrop-blur-md">
+                  <span className="rounded-full bg-[var(--bg-soft)]/85 px-3 py-1 text-[11px] font-bold tracking-widest text-[var(--neon-blue)] ring-1 ring-[var(--glass-border)] backdrop-blur-md">
                     {RANK_LABELS[index]}
                   </span>
                   {isNew(video) && (
-                    <span className="rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-2.5 py-1 text-[11px] font-bold text-white shadow-[0_2px_12px_-2px_rgba(40,96,255,0.6)]">
+                    <span className="rounded-full bg-gradient-to-r from-[var(--neon-blue)] to-[var(--neon-blue-soft)] px-2.5 py-1 text-[11px] font-bold text-white shadow-[0_2px_12px_-2px_var(--glow-blue)]">
                       NEW
                     </span>
                   )}
@@ -78,10 +78,10 @@ export function FeaturedShowcase() {
                 </span>
               </div>
               <div className="flex flex-1 flex-col gap-1 px-1.5 py-3">
-                <h3 className="line-clamp-2 min-h-[2.75em] text-sm font-medium leading-snug text-slate-800 group-hover:text-slate-900">
+                <h3 className="line-clamp-2 min-h-[2.75em] text-sm font-medium leading-snug text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]">
                   {video.title}
                 </h3>
-                <p className="mt-auto pt-1 text-xs text-slate-400">
+                <p className="mt-auto pt-1 text-xs text-[var(--text-muted)]">
                   {video.views} · {video.published}
                 </p>
               </div>

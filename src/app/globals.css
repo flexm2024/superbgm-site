@@ -1,4 +1,5 @@
-/* SuperBGM 글로벌 스타일: 라이트 몽환 테마, Pretendard 폰트, aurora 그라디언트, 글래스모피즘 유틸리티 */
+/* SuperBGM 글로벌 스타일: 딥블루 네온 드림 테마, Pretendard 폰트, 글래스모피즘 유틸리티 */
+/* Design Tokens: --bg-*, --neon-*, --text-*, --glow-* 를 단일 소스로 사용 */
 @import "tailwindcss";
 
 @font-face {
@@ -9,9 +10,43 @@
   font-display: swap;
 }
 
+/* ---------- Design Tokens ---------- */
 :root {
-  --background: #f6f8ff;
-  --foreground: #1e293b;
+  /* 배경 그라데이션 (deep → mid → soft) */
+  --bg-deep: #050b2e;
+  --bg-mid: #0a1140;
+  --bg-soft: #101a5c;
+
+  /* 글래스모피즘 서피스 */
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-strong: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-shadow: 0 8px 32px -12px rgba(5, 11, 46, 0.6);
+
+  /* 텍스트 (딥블루 위 WCAG AA 대비) */
+  --text-primary: #eef1ff;
+  --text-secondary: #b9c2e8;
+  --text-muted: #a3acd9;
+
+  /* 네온 포인트 */
+  --neon-blue: #4d7cff;
+  --neon-blue-soft: #6b8fff;
+  --neon-violet: #a78bfa;
+  --neon-pink: #f472b6;
+  --neon-cyan: #22d3ee;
+
+  /* 그라데이션 */
+  --grad-aurora: linear-gradient(120deg, #4d7cff, #a78bfa, #f472b6);
+  --grad-btn: linear-gradient(120deg, #4d7cff, #6b8fff);
+
+  /* 네온 글로우 그림자 */
+  --glow-blue: rgba(77, 124, 255, 0.45);
+  --glow-violet: rgba(167, 139, 250, 0.45);
+  --glow-pink: rgba(244, 114, 182, 0.4);
+  --glow-cyan: rgba(34, 211, 238, 0.4);
+
+  --background: var(--bg-deep);
+  --foreground: var(--text-primary);
 }
 
 @theme inline {
@@ -30,21 +65,74 @@ body {
 }
 
 @layer utilities {
+  /* 글래스모피즘 카드 */
   .glass {
-    background: rgba(255, 255, 255, 0.65);
-    border: 1px solid rgba(226, 233, 248, 0.9);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 8px 32px -12px rgba(40, 96, 255, 0.12);
+    box-shadow: var(--glass-shadow);
   }
 
+  .glass-strong {
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* 오로라 그라디언트 텍스트 */
   .text-aurora {
-    background-image: linear-gradient(120deg, #2860ff, #8b5cf6, #ec4899);
+    background-image: var(--grad-aurora);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
+  /* 네온 글로우 텍스트 (Hero 대형 타이포) */
+  .text-neon-glow {
+    text-shadow:
+      0 0 24px rgba(77, 124, 255, 0.45),
+      0 0 64px rgba(167, 139, 250, 0.3);
+  }
+
+  /* 카드 호버: Glow + Scale (그룹 내 개별 컬러 글로우는 style로 오버라이드) */
+  .card-hover {
+    transition:
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.4s ease,
+      background-color 0.4s ease;
+    will-change: transform, box-shadow;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 0 0 1px rgba(77, 124, 255, 0.25),
+      0 18px 48px -12px rgba(77, 124, 255, 0.35),
+      0 0 42px -8px rgba(167, 139, 250, 0.3);
+  }
+
+  /* 호버 시 나타나는 재생 버튼 */
+  .play-reveal {
+    opacity: 0;
+    transform: scale(0.85);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .group:hover .play-reveal,
+  .group:focus-within .play-reveal {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* 애니메이션 유틸 */
   .animate-float-note {
     animation: float-note 5s ease-in-out infinite;
   }
@@ -73,6 +161,37 @@ body {
   .animate-aurora-text {
     background-size: 200% auto;
     animation: aurora-shimmer 6s ease-in-out infinite;
+  }
+
+  .animate-twinkle {
+    animation: twinkle 3.6s ease-in-out infinite;
+  }
+
+  .animate-dash-flow {
+    animation: dash-flow 7s linear infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2.4s ease-in-out infinite;
+  }
+
+  /* 별 필드 배경 (패턴 반복) */
+  .bg-star-dots {
+    background-image:
+      radial-gradient(1px 1px at 25% 15%, rgba(255, 255, 255, 0.55) 50%, transparent 51%),
+      radial-gradient(1px 1px at 55% 40%, rgba(255, 255, 255, 0.35) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 75% 65%, rgba(255, 255, 255, 0.4) 50%, transparent 51%),
+      radial-gradient(1px 1px at 90% 25%, rgba(255, 255, 255, 0.3) 50%, transparent 51%),
+      radial-gradient(1px 1px at 10% 80%, rgba(255, 255, 255, 0.4) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 45% 90%, rgba(255, 255, 255, 0.35) 50%, transparent 51%),
+      radial-gradient(1px 1px at 65% 8%, rgba(255, 255, 255, 0.5) 50%, transparent 51%),
+      radial-gradient(1px 1px at 85% 85%, rgba(255, 255, 255, 0.3) 50%, transparent 51%);
+    background-size: 220px 220px;
+  }
+
+  /* 필름 그레인 */
+  .premium-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
   }
 
   .btn-shine {
@@ -109,6 +228,7 @@ body {
   }
 }
 
+/* ---------- Keyframes ---------- */
 @keyframes spin-slow {
   to {
     transform: rotate(360deg);
@@ -167,28 +287,39 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-float-note,
-  .animate-float-note-slow,
-  .animate-eq,
-  .animate-bob,
-  .animate-spin-slow,
-  .animate-aurora-text,
-  .animate-float-particle {
-    animation: none;
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.85);
   }
-
-  .btn-shine::after {
-    transition: none;
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
   }
 }
 
-/* ---------- 프리미엄 미리보기 전용 유틸 (premium-*) ---------- */
-
-.premium-grain {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -240;
+  }
 }
 
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(77, 124, 255, 0.5),
+      0 0 24px 4px rgba(77, 124, 255, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(77, 124, 255, 0),
+      0 0 40px 12px rgba(167, 139, 250, 0.35);
+  }
+}
+
+/* ---------- 스크롤 리빌 ---------- */
 .premium-reveal {
   opacity: 0;
   transform: translateY(26px);
@@ -203,7 +334,37 @@ body {
   transform: translateY(0);
 }
 
+/* ---------- Reduced Motion ---------- */
 @media (prefers-reduced-motion: reduce) {
+  .animate-float-note,
+  .animate-float-note-slow,
+  .animate-eq,
+  .animate-bob,
+  .animate-spin-slow,
+  .animate-aurora-text,
+  .animate-float-particle,
+  .animate-twinkle,
+  .animate-dash-flow,
+  .animate-pulse-glow {
+    animation: none;
+  }
+
+  .btn-shine::after {
+    transition: none;
+  }
+
+  .card-hover,
+  .card-hover:hover {
+    transition: none;
+    transform: none;
+  }
+
+  .play-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
   .premium-reveal {
     opacity: 1;
     transform: none;

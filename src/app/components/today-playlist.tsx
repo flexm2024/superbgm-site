@@ -33,10 +33,10 @@ export function TodayPlaylist() {
       className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 pb-4 pt-8 sm:px-6 sm:pt-24"
     >
       <Reveal>
-        <div className="relative overflow-hidden rounded-3xl bg-white/50 p-6 shadow-[0_16px_50px_-24px_rgba(40,96,255,0.25)] ring-1 ring-indigo-100/80 sm:p-10">
+        <div className="glass relative overflow-hidden rounded-3xl p-6 shadow-[0_16px_50px_-24px_var(--glow-blue)] sm:p-10">
           <div
             aria-hidden
-            className="absolute inset-0 -z-10 bg-gradient-to-br from-[#2860ff]/10 via-transparent to-[#ec4899]/10"
+            className="absolute inset-0 -z-10 bg-gradient-to-br from-[var(--neon-blue)]/10 via-transparent to-[var(--neon-pink)]/10"
           />
           <div className="flex flex-col gap-8 sm:flex-row sm:items-center">
             <button
@@ -66,23 +66,23 @@ export function TodayPlaylist() {
               </span>
             </button>
             <div className="flex flex-1 flex-col items-start gap-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2860ff]">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--neon-blue)]">
                 Today&apos;s Pick
               </p>
-              <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+              <h2 className="text-2xl font-bold tracking-tight text-[var(--text-primary)] sm:text-3xl">
                 오늘의 플레이리스트
               </h2>
-              <h3 className="line-clamp-2 text-base font-semibold text-slate-800 sm:text-lg">
+              <h3 className="line-clamp-2 text-base font-semibold text-[var(--text-secondary)] sm:text-lg">
                 {video.title}
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-[var(--text-muted)]">
                 {video.views} · {video.published}
               </p>
               <div className="mt-2 flex flex-wrap gap-3">
                 <button
                   type="button"
                   onClick={() => setActiveVideo(video)}
-                  className="btn-shine inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-6 py-2.5 font-semibold text-white shadow-[0_8px_28px_-8px_rgba(40,96,255,0.5)] transition-all hover:-translate-y-0.5"
+                  className="btn-shine inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--neon-blue)] to-[var(--neon-blue-soft)] px-6 py-2.5 font-semibold text-white shadow-[0_8px_28px_-8px_var(--glow-blue)] transition-all hover:-translate-y-0.5"
                 >
                   미리듣기
                 </button>
@@ -90,14 +90,14 @@ export function TodayPlaylist() {
                   href={videoUrl(video.videoId)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-white/80 px-6 py-2.5 font-semibold text-slate-700 ring-1 ring-indigo-100 transition-all hover:-translate-y-0.5 hover:text-slate-900 hover:ring-[#2860ff]/50"
+                  className="glass inline-flex items-center gap-2 rounded-full px-6 py-2.5 font-semibold text-[var(--text-secondary)] transition-all hover:-translate-y-0.5 hover:text-[var(--text-primary)] hover:ring-[var(--neon-blue)]/50"
                 >
                   유튜브에서 보기
                 </a>
                 <button
                   type="button"
                   onClick={pickAnother}
-                  className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-slate-500 transition-colors hover:text-[#2860ff]"
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-[var(--text-muted)] transition-colors hover:text-[var(--neon-blue)]"
                 >
                   <svg
                     width="14"

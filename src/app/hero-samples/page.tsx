@@ -32,14 +32,14 @@ const SAMPLES = [
 export default function HeroSamplesPage() {
   return (
     <HeroSampleShell title="스타일 목록">
-      <p className="text-sm font-medium tracking-widest text-indigo-300">
+      <p className="text-sm font-medium tracking-widest text-[var(--neon-blue)]">
         HERO STYLES
       </p>
-      <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+      <h1 className="mt-3 text-3xl font-bold tracking-tight text-[var(--text-primary)] sm:text-4xl">
         움직이는 히어로{" "}
         <span className="text-aurora">샘플 4종</span>
       </h1>
-      <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-400">
+      <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--text-muted)]">
         아래 카드를 눌러 각 스타일을 직접 확인해 보세요. 마음에 드는 것을
         고르시면 메인 페이지에 바로 적용합니다.
       </p>
@@ -50,13 +50,13 @@ export default function HeroSamplesPage() {
             href={sample.href}
             className="glass group rounded-3xl p-6 text-left transition-transform hover:-translate-y-1 hover:border-white/20"
           >
-            <h2 className="text-lg font-bold text-white group-hover:text-aurora">
+            <h2 className="text-lg font-bold text-[var(--text-primary)] group-hover:text-aurora">
               {sample.title}
             </h2>
-            <p className="mt-3 text-sm leading-6 text-zinc-400">
+            <p className="mt-3 text-sm leading-6 text-[var(--text-muted)]">
               {sample.description}
             </p>
-            <p className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-indigo-300">
+            <p className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--neon-blue)]">
               미리보기
               <svg
                 className="transition-transform group-hover:translate-x-1"

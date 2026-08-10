@@ -9,18 +9,18 @@ export function StorySection() {
       className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 py-16 sm:px-6 sm:py-24"
     >
       <Reveal>
-        <div className="relative overflow-hidden rounded-3xl bg-white/50 p-8 ring-1 ring-indigo-100/80 sm:p-14">
+        <div className="glass-strong relative overflow-hidden rounded-3xl p-8 sm:p-14">
           <div
             aria-hidden
-            className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-400/20 via-transparent to-violet-400/20"
+            className="absolute inset-0 -z-10 bg-gradient-to-br from-[var(--neon-blue)]/10 via-transparent to-[var(--neon-violet)]/10"
           />
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2860ff]">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--neon-blue)]">
             Our Story
           </p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--text-primary)] sm:text-4xl">
             SuperBGM 이야기
           </h2>
-          <p className="mt-6 max-w-3xl leading-8 text-slate-600">
+          <p className="mt-6 max-w-3xl leading-8 text-[var(--text-secondary)]">
             SuperBGM은 감성 발라드부터 카페 재즈, Lofi, 인디포크, 그리고
             계절의 분위기를 담은 플레이리스트를 선보이는 음악 채널입니다.
             겨울의 설레는 밤, 가을 낙엽을 밟는 산책, 여름의 낭만적인 순간까지
@@ -31,7 +31,7 @@ export function StorySection() {
               href={CHANNEL.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-shine inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-6 py-2.5 font-semibold text-white shadow-[0_8px_28px_-8px_rgba(40,96,255,0.5)] transition-all hover:-translate-y-0.5"
+              className="btn-shine inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--neon-blue)] to-[var(--neon-blue-soft)] px-6 py-2.5 font-semibold text-white shadow-[0_8px_28px_-8px_var(--glow-blue)] transition-all hover:-translate-y-0.5"
             >
               채널 보러가기
             </a>

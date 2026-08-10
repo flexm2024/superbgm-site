@@ -32,18 +32,18 @@ export function VideoPreviewModal({
       aria-modal="true"
       aria-label={`${video.title} 미리듣기`}
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--bg-deep)]/80 p-4 backdrop-blur-sm"
     >
       <div
         role="document"
         onClick={(event) => event.stopPropagation()}
-        className="relative w-full max-w-3xl rounded-3xl bg-white p-4 shadow-2xl ring-1 ring-indigo-100/80 sm:p-6"
+        className="glass-strong relative w-full max-w-3xl rounded-3xl p-4 shadow-2xl sm:p-6"
       >
         <button
           type="button"
           onClick={onClose}
           aria-label="닫기"
-          className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-500 shadow ring-1 ring-slate-200 transition-colors hover:text-slate-900"
+          className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--glass-bg-strong)] text-[var(--text-muted)] shadow ring-1 ring-[var(--glass-border)] transition-colors hover:text-[var(--text-primary)]"
         >
           <svg
             width="14"
@@ -59,7 +59,7 @@ export function VideoPreviewModal({
             <path d="M18 6L6 18M6 6l12 12" />
           </svg>
         </button>
-        <div className="aspect-video overflow-hidden rounded-2xl bg-slate-950">
+        <div className="aspect-video overflow-hidden rounded-2xl bg-[var(--bg-deep)]">
           <iframe
             src={`https://www.youtube-nocookie.com/embed/${video.videoId}?autoplay=1&rel=0`}
             title={video.title}
@@ -69,14 +69,14 @@ export function VideoPreviewModal({
           />
         </div>
         <div className="flex flex-wrap items-center justify-between gap-3 pt-4">
-          <h3 className="line-clamp-2 flex-1 text-sm font-semibold text-slate-900 sm:text-base">
+          <h3 className="line-clamp-2 flex-1 text-sm font-semibold text-[var(--text-primary)] sm:text-base">
             {video.title}
           </h3>
           <a
             href={videoUrl(video.videoId)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-4 py-2 text-xs font-semibold text-white shadow-[0_4px_20px_-4px_rgba(40,96,255,0.5)] transition-all hover:-translate-y-0.5"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-gradient-to-r from-[var(--neon-blue)] to-[var(--neon-blue-soft)] px-4 py-2 text-xs font-semibold text-white shadow-[0_4px_20px_-4px_var(--glow-blue)] transition-all hover:-translate-y-0.5"
           >
             <svg
               width="12"

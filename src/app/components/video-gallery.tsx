@@ -33,14 +33,14 @@ export function VideoGallery() {
     <section id="playlists" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-20">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          <h2 className="text-2xl font-bold tracking-tight text-[var(--text-primary)] sm:text-3xl">
             최신 플레이리스트
           </h2>
-          <p className="mt-2 text-sm text-zinc-400">
+          <p className="mt-2 text-sm text-[var(--text-muted)]">
             계절과 분위기에 맞는 플레이리스트를 둘러보세요
           </p>
         </div>
-        <p className="text-sm text-zinc-500">{filtered.length}개의 플레이리스트</p>
+        <p className="text-sm text-[var(--text-muted)]">{filtered.length}개의 플레이리스트</p>
       </div>
 
       <div
@@ -59,8 +59,8 @@ export function VideoGallery() {
               onClick={() => setActive(tab.value)}
               className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                 selected
-                  ? "bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white"
-                  : "glass text-zinc-300 hover:text-white"
+                  ? "bg-gradient-to-r from-[var(--neon-blue)] to-[var(--neon-violet)] text-white"
+                  : "glass text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
               }`}
             >
               {tab.label}
@@ -70,7 +70,7 @@ export function VideoGallery() {
       </div>
 
       {filtered.length === 0 ? (
-        <p className="mt-12 rounded-2xl glass px-6 py-16 text-center text-zinc-400">
+        <p className="mt-12 rounded-2xl glass px-6 py-16 text-center text-[var(--text-muted)]">
           이 장르의 플레이리스트가 아직 없어요. 다른 태그를 둘러보세요.
         </p>
       ) : (
@@ -81,7 +81,7 @@ export function VideoGallery() {
               href={videoUrl(video.videoId)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group glass flex flex-col rounded-2xl p-2.5 transition-all hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.07]"
+              className="card-hover group glass flex flex-col rounded-2xl p-2.5"
             >
               <div className="relative aspect-video overflow-hidden rounded-xl">
                 <Image
@@ -93,10 +93,10 @@ export function VideoGallery() {
                 />
               </div>
               <div className="flex flex-col gap-1 px-1.5 py-3">
-                <h3 className="line-clamp-2 text-sm font-medium leading-snug text-zinc-100 group-hover:text-white">
+                <h3 className="line-clamp-2 text-sm font-medium leading-snug text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]">
                   {video.title}
                 </h3>
-                <p className="mt-auto pt-1 text-xs text-zinc-500">
+                <p className="mt-auto pt-1 text-xs text-[var(--text-muted)]">
                   {video.views} · {video.published}
                 </p>
               </div>

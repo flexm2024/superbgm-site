@@ -11,10 +11,10 @@ const [SECOND_HEAD, SECOND_TAIL] = (DESCRIPTION_LINES[1] ?? "").split("음악,")
 
 const PARTICLES = Array.from({ length: 30 }, (_, index) => {
   const palette = [
-    { color: "bg-[#2860ff]/90", glow: "rgba(40,96,255,0.55)" },
-    { color: "bg-[#8b5cf6]/90", glow: "rgba(139,92,246,0.55)" },
-    { color: "bg-[#ec4899]/85", glow: "rgba(236,72,153,0.5)" },
-    { color: "bg-[#38bdf8]/90", glow: "rgba(56,189,248,0.55)" },
+    { color: "bg-[var(--neon-blue)]/90", glow: "rgba(77,124,255,0.55)" },
+    { color: "bg-[var(--neon-violet)]/90", glow: "rgba(167,139,250,0.55)" },
+    { color: "bg-[var(--neon-pink)]/85", glow: "rgba(244,114,182,0.5)" },
+    { color: "bg-[var(--neon-cyan)]/90", glow: "rgba(34,211,238,0.55)" },
   ];
   const p = palette[index % palette.length];
   return {
@@ -52,17 +52,17 @@ export function PremiumHero() {
             }}
           />
         ))}
-        <span className="animate-float-note absolute left-[10%] top-[18%] hidden select-none text-3xl text-[#2860ff]/40 md:block">
+        <span className="animate-float-note absolute left-[10%] top-[18%] hidden select-none text-3xl text-[var(--neon-blue)]/40 md:block">
           ♪
         </span>
-        <span className="animate-float-note-slow absolute right-[12%] top-[45%] hidden select-none text-3xl text-[#ec4899]/40 md:block">
+        <span className="animate-float-note-slow absolute right-[12%] top-[45%] hidden select-none text-3xl text-[var(--neon-pink)]/40 md:block">
           ♫
         </span>
         <div className="absolute inset-x-0 bottom-0 flex h-16 items-center justify-center gap-[3px] overflow-hidden opacity-60 sm:h-24">
           {BARS.map((bar, index) => (
             <span
               key={index}
-              className="animate-eq w-1 rounded-full bg-gradient-to-t from-[#2860ff]/50 via-[#8b5cf6]/50 to-[#ec4899]/50"
+              className="animate-eq w-1 rounded-full bg-gradient-to-t from-[var(--neon-blue)]/50 via-[var(--neon-violet)]/50 to-[var(--neon-pink)]/50"
               style={{
                 height: `${bar.height}px`,
                 animationDelay: bar.delay,
@@ -79,19 +79,19 @@ export function PremiumHero() {
           width={144}
           height={144}
           priority
-          className="h-28 w-28 rounded-full bg-white/40 shadow-[0_0_80px_rgba(40,96,255,0.35)] ring-2 ring-white/70 ring-offset-8 ring-offset-[#f6f8ff] sm:h-36 sm:w-36"
+          className="h-28 w-28 rounded-full bg-white/10 shadow-[0_0_80px_var(--glow-blue)] ring-2 ring-[var(--glass-border)] ring-offset-8 ring-offset-[var(--bg-deep)] sm:h-36 sm:w-36"
         />
       </Reveal>
 
       <Reveal delay={80}>
-        <p className="mt-9 text-sm font-semibold uppercase tracking-[0.35em] text-[#2860ff]">
+        <p className="mt-9 text-sm font-semibold uppercase tracking-[0.35em] text-[var(--neon-blue)]">
           {CHANNEL.handle}
         </p>
       </Reveal>
 
       <Reveal delay={160}>
         <h1 className="mt-5 break-keep text-4xl font-bold leading-[1.15] tracking-tight sm:text-6xl sm:leading-[1.05] lg:text-7xl xl:text-8xl">
-          <span className="text-slate-900">
+          <span className="text-[var(--text-primary)]">
             감성을 깨우는
           </span>
           <br />
@@ -102,7 +102,7 @@ export function PremiumHero() {
       </Reveal>
 
       <Reveal delay={240}>
-        <p className="mt-6 max-w-2xl whitespace-pre-line text-sm leading-6 text-slate-500 sm:mt-7 sm:text-lg sm:leading-9">
+        <p className="mt-6 max-w-2xl whitespace-pre-line text-sm leading-6 text-[var(--text-secondary)] sm:mt-7 sm:text-lg sm:leading-9">
           {DESCRIPTION_LINES.map((line, index) => (
             <Fragment key={index}>
               {index > 0 && "\n"}
@@ -126,7 +126,7 @@ export function PremiumHero() {
             href={CHANNEL.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-shine w-full rounded-full bg-gradient-to-r from-[#2860ff] to-[#6b8fff] px-8 py-3.5 text-center font-semibold text-white shadow-[0_8px_32px_-8px_rgba(40,96,255,0.6)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_44px_-8px_rgba(40,96,255,0.7)] sm:w-auto"
+            className="btn-shine w-full rounded-full bg-gradient-to-r from-[var(--neon-blue)] to-[var(--neon-blue-soft)] px-8 py-3.5 text-center font-semibold text-white shadow-[0_8px_32px_-8px_var(--glow-blue)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_44px_-8px_var(--glow-blue)] sm:w-auto"
           >
             유튜브 구독하기
           </a>
@@ -136,7 +136,7 @@ export function PremiumHero() {
       <a
         href="#featured"
         aria-label="추천 플레이리스트 보기"
-        className="mt-12 inline-flex flex-col items-center gap-1.5 text-slate-400 transition-colors hover:text-slate-600 sm:mt-16"
+        className="mt-12 inline-flex flex-col items-center gap-1.5 text-[var(--text-muted)] transition-colors hover:text-[var(--text-secondary)] sm:mt-16"
       >
         <span className="text-[11px] font-medium tracking-[0.25em]">SCROLL</span>
         <svg
